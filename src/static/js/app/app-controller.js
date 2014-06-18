@@ -8,6 +8,8 @@ var activity = require('built/app/activity');
 var keys = require('built/app/keys');
 var app = require('app/app');
 
+var TaskCreationView = require('app/views/TaskCreationView')
+
 
 
 
@@ -21,10 +23,16 @@ var AppController = marionette.Controller.extend({
         this.app = app;
     },
 
-    index: function(){
-        
+    // A filter for task lists, so that users can filter
+    // between active and completed tasks.
+    taskListFilter: function(filter) {
+        // TODO
     },
-    
+
+    index: function() {
+
+    },
+
     BUILT: function(){
 
         // Key Management

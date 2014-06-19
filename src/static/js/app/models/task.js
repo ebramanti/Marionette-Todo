@@ -1,15 +1,24 @@
 // Model for tasks in Todo app
-var Task = Backbone.model.extend({
+define(function( require, exports, module ){
+
+var backbone = require('backbone');
+var Task = backbone.Model.extend({
     defaults: {
-        title: '', //empty when user creates a task
-        status: 'active',
+        //empty when user creates a task
+        title: '',
+
+        isActive: true,
         date: undefined
     },
     initialize: function() {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
         this.set('date', Date.now());
     },
-    changeStatus: function() {
-        return this.get('status') === 'active' ? this.set('status', 'completed') : this.set('status', 'active')
+    toggleIsActive: function() {
+        return !this.get('isActive');
     }
+});
+
+exports.Task = Task;
+
 });

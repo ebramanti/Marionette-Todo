@@ -1,10 +1,18 @@
-var TaskCreationView = Marionette.ItemView.extend({
-    template: '',
+define(function (require, exports, module) {
+
+var marionette = require('marionette');
+var template = require('hbs!../templates/task-creation-view');
+
+var TaskCreationView = marionette.ItemView.extend({
+    template : template,
     ui: {
         input: '#new-task'
     },
     events: {
         'keypress #new-task': 'onInputConfirm'
+    },
+    initialize : function(){
+        // TODO
     },
     onInputConfirm: function(event) {
         //http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
@@ -20,4 +28,8 @@ var TaskCreationView = Marionette.ItemView.extend({
             })
         }
     }
+});
+
+exports.TaskCreationView = TaskCreationView;
+
 });

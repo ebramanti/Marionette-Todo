@@ -8,9 +8,7 @@ var activity = require('built/app/activity');
 var keys = require('built/app/keys');
 var app = require('app/app');
 
-var TaskCreationView = require('app/views/TaskCreationView')
-
-
+var TaskCreationView = require('app/views/task-creation-view').TaskCreationView;
 
 
 var AppController = marionette.Controller.extend({
@@ -21,6 +19,7 @@ var AppController = marionette.Controller.extend({
         // You can customize that as necessary.
         this.BUILT();
         this.app = app;
+        //this.app.initialTask.show(new TaskCreationView());
     },
 
     // A filter for task lists, so that users can filter

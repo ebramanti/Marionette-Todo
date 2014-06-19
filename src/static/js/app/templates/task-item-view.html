@@ -1,10 +1,11 @@
-<div>
+<form class='pure-form'>
+    {{title}}
     <!-- TODO: See how state of task is pulled into HTML. -->
     <input class='changeStatus' type='checkbox'>
-    <label></label>
-    <button class='edit'></button>
-    <button class='remove'></button>
-</div>
+    <label>{{title}}</label>
+    <button class='edit'>Edit</button>
+    <button class='remove'>Remove</button>
+</form>
 <!-- TODO: Figure out how to enable/disable edit overlay. -->
 <!-- Note: Will be done in controller? -->
-<input class='editor'></input>
+<!--<input class='editor'></input>-->

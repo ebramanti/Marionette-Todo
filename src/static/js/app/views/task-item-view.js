@@ -1,11 +1,13 @@
-var TaskItemView = Backbone.Marionette.CollectionView.extend({
-    tagName: '',
-    template: '', //TODO fill this in when ready
+define(function (require, exports, module) {
 
+var marionette = require('marionette');
+var template = require('hbs!../templates/task-item-view');
+
+var TaskItemView = marionette.ItemView.extend({
+    template : template,
     ui: {
         edit: '.edit'
-    }
-
+    },
     // Four possible events: remove, edit, accept edit,
     // & active/completed state switching.
     events: {
@@ -14,19 +16,18 @@ var TaskItemView = Backbone.Marionette.CollectionView.extend({
         'keypress .edit': 'editAccept',
         'click .changeStatus': 'switchState'
     },
-
     initialize: function() {
-        // TODO figure this out (think I use listenTo() here.)
-        //this.bindTo();
+        // TODO
     },
 
     // On render, set all of the different completed or active states.
     onRender: function() {
         this.$el.removeClass('active completed')
-        if (this.model.get('status') === 'completed') {
-            this.$el.addClass('completed');
-        } else if (this.model.get('status') === 'active') {
+        var isActive = this.model.get('isActive');
+        if (isActive) {
             this.$el.addClass('active');
+        } else {
+            this.$el.addClass('completed');
         }
     },
 
@@ -43,14 +44,17 @@ var TaskItemView = Backbone.Marionette.CollectionView.extend({
             this.model.set('title', taskString).save();
             this.$el.removeClass('editor')
         }
-    }
+    },
 
     switchState: function() {
-        this.model.changeStatus().save();
+        this.model.toggleIsActive().save();
     },
 
     remove: function() {
         this.model.destroy();
     }
+});
+
+exports.TaskItemView = TaskItemView;
 
 });

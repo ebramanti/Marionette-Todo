@@ -9,6 +9,11 @@ var keys = require('built/app/keys');
 var app = require('app/app');
 
 var TaskCreationView = require('app/views/task-creation-view').TaskCreationView;
+var TaskManipulatorView = require('app/views/task-manipulator-view').TaskManipulatorView;
+var TaskListView = require('app/views/task-list-view').TaskListView;
+
+var TaskList = require('app/collections/task-list').TaskList;
+var Task = require('app/models/task').Task;
 
 
 var AppController = marionette.Controller.extend({
@@ -19,7 +24,20 @@ var AppController = marionette.Controller.extend({
         // You can customize that as necessary.
         this.BUILT();
         this.app = app;
-        //this.app.initialTask.show(new TaskCreationView());
+
+
+        this.app.initialTask.show(new TaskCreationView());
+        var a = new TaskList();
+        a.add([
+            {name: 'Hello, world', isActive: false},
+            {name: 'Another task'},
+            {name: 'Make it rain!'}
+        ]);
+        this.app.taskListView.show(new TaskListView({
+            collection: a
+        }));
+        this.app.taskManipulatorView.show(new TaskManipulatorView());
+
     },
 
     // A filter for task lists, so that users can filter

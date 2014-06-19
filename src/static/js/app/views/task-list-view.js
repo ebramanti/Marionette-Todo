@@ -1,19 +1,24 @@
-var TaskListView = Backbone.Marionette.CollectionView.extend({
-    template: '',
-    itemView: TaskList,
-    //itemViewController: '',
+define(function (require, exports, module) {
 
-    initialize: function() {
-        this.listenTo(this.collection, 'add', this.updateStatus);
+var marionette = require('marionette');
+var TaskItemView = require('app/views/task-item-view').TaskItemView;
+var template = require('hbs!../templates/task-list-view');
+
+var TaskListView =  marionette.CollectionView.extend({
+    template: template,
+    itemView : TaskItemView,
+    itemViewContainer : '#task-list',
+    initialize : function(){
+
     },
+    ui : {
 
-    onRender: function() {
-        // Update statuses after DOM is loaded.
-        this.updateStatus();
     },
+    events : {
 
-    // Updates status of checkboxes when called.
-    updateStatus: function() {
-        // TODO
     }
-})
+});
+
+exports.TaskListView = TaskListView;
+
+});

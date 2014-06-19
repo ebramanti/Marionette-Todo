@@ -2,6 +2,7 @@ define(function (require, exports, module) {
 
 var marionette = require('marionette');
 var template = require('hbs!../templates/task-creation-view');
+var keys = require('app/enums/keys').keys;
 
 var TaskCreationView = marionette.ItemView.extend({
     template : template,
@@ -15,14 +16,11 @@ var TaskCreationView = marionette.ItemView.extend({
         // TODO
     },
     onInputConfirm: function(event) {
-        //http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
-        var ENTER_KEY = 13;
-
         // trim() trims whitespace (if any) in val()
         var taskString = this.ui.input.val().trim();
 
         // Check for enter key press & if string is defined.
-        if (event.which === ENTER_KEY && taskString) {
+        if (event.which === keys.ENTER_KEY && taskString) {
             TaskList.create({
                 title: taskString
             })

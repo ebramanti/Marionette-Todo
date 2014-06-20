@@ -27,11 +27,6 @@ var AppController = marionette.Controller.extend({
         this.app.headerRegion.show(new HeaderView({
             collection: this.collection
         }));
-        /*tasks.add([
-            {name: 'Hello, world', isActive: false},
-            {name: 'Another task'},
-            {name: 'Make it rain!'}
-        ]); */
         this.app.listRegion.show(new ListView({
             collection: this.collection
         }));

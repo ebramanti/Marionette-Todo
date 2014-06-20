@@ -1,19 +1,12 @@
 define(function (require, exports, module) {
 
 var marionette = require('marionette');
-var TaskItemView = require('app/views/item-view').TaskItemView;
+var ItemView = require('app/views/item-view').ItemView;
 var template = require('hbs!../templates/item-view');
 
 var ListView =  marionette.CollectionView.extend({
-    template: template,
-    itemView : TaskItemView,
-    initialize : function(){
-
-    },
-    ui : {
-
-    },
-    events : {
+    itemView : ItemView,
+    initialize : function(options){
 
     }
 });

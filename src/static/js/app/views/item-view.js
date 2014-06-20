@@ -48,6 +48,8 @@ var ItemView = marionette.ItemView.extend({
 
     switchState: function() {
         this.model.toggleIsActive();
+        // TODO switch div class like 'onRender' function
+        // whenever this is called.
     },
 
     remove: function() {

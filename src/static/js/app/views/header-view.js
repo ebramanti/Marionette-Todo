@@ -21,9 +21,11 @@ var HeaderView = marionette.ItemView.extend({
 
         // Check for enter key press & if string is defined.
         if (event.which === keys.ENTER_KEY && taskString) {
+            event.preventDefault();
             this.collection.add({
                 title: taskString
             })
+            this.ui.input.val('');
         }
     }
 });

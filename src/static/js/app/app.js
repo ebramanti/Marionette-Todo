@@ -4,10 +4,9 @@ define(function(require, exports, module) {
     var app = new marionette.Application();
 
     app.addRegions({
-        initialTask: '#task-creation-view',
-        taskListView: '#task-list-view',
-        taskItemView: '#task-item-view',
-        taskManipulatorView: '#task-manipulator-view'
+        headerRegion: '#header-view',
+        listRegion: '#list-view',
+        footerRegion: '#footer-view'
     });
 
     app.addInitializer(function() {

@@ -3,7 +3,7 @@ define(function( require, exports, module ){
 var backbone = require('backbone');
 var Task = require('app/models/task').Task;
 
-var TaskList =  backbone.Collection.extend({
+var Tasks =  backbone.Collection.extend({
     //urlRoot: '/api/v1/auction_item/',
     model: Task,
     completedTasks: function() {
@@ -18,6 +18,6 @@ var TaskList =  backbone.Collection.extend({
     }
 });
 
-exports.TaskList = TaskList;
+exports.Tasks = Tasks;
 
 });

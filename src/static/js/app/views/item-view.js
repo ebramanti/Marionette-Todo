@@ -1,9 +1,10 @@
 define(function (require, exports, module) {
 
 var marionette = require('marionette');
-var template = require('hbs!../templates/task-item-view');
+var template = require('hbs!../templates/item-view');
+var keys = require('app/enums/keys').keys;
 
-var TaskItemView = marionette.ItemView.extend({
+var ItemView = marionette.ItemView.extend({
     template : template,
     ui: {
         edit: '.edit'
@@ -16,8 +17,8 @@ var TaskItemView = marionette.ItemView.extend({
         'keypress .edit': 'editAccept',
         'click .changeStatus': 'switchState'
     },
-    initialize: function() {
-        // TODO
+    initialize: function(options) {
+        this.collection = options.collection;
     },
 
     // On render, set all of the different completed or active states.
@@ -38,16 +39,15 @@ var TaskItemView = marionette.ItemView.extend({
 
     // Almost exact same logic as TaskCreation's 'onInputConfirm'.
     editAccept: function() {
-        var ENTER_KEY = 13;
         var taskString = this.ui.input.val().trim();
-        if (event.which === ENTER_KEY && taskString) {
+        if (event.which === keys.ENTER_KEY && taskString) {
             this.model.set('title', taskString).save();
             this.$el.removeClass('editor')
         }
     },
 
     switchState: function() {
-        this.model.toggleIsActive().save();
+        this.model.toggleIsActive();
     },
 
     remove: function() {
@@ -55,6 +55,6 @@ var TaskItemView = marionette.ItemView.extend({
     }
 });
 
-exports.TaskItemView = TaskItemView;
+exports.ItemView = ItemView;
 
 });

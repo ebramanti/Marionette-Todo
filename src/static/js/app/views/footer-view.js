@@ -1,10 +1,10 @@
 define(function (require, exports, module) {
 
 var marionette = require('marionette');
-var template = require('hbs!../templates/task-manipulator-view');
+var template = require('hbs!../templates/footer-view');
 var keys = require('app/enums/keys').keys;
 
-var TaskManipulatorView = Backbone.Marionette.Layout.extend({
+var FooterView = Backbone.Marionette.Layout.extend({
     template: template,
     ui: {
         filters: ''
@@ -23,6 +23,6 @@ var TaskManipulatorView = Backbone.Marionette.Layout.extend({
     }
 });
 
-exports.TaskManipulatorView = TaskManipulatorView;
+exports.FooterView = FooterView;
 
 });

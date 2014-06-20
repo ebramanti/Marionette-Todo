@@ -1,10 +1,10 @@
 define(function (require, exports, module) {
 
 var marionette = require('marionette');
-var template = require('hbs!../templates/task-creation-view');
+var template = require('hbs!../templates/header-view');
 var keys = require('app/enums/keys').keys;
 
-var TaskCreationView = marionette.ItemView.extend({
+var HeaderView = marionette.ItemView.extend({
     template : template,
     ui: {
         input: '#new-task'
@@ -12,8 +12,8 @@ var TaskCreationView = marionette.ItemView.extend({
     events: {
         'keypress #new-task': 'onInputConfirm'
     },
-    initialize : function(){
-        // TODO
+    initialize : function(options){
+        this.collection = options.collection
     },
     onInputConfirm: function(event) {
         // trim() trims whitespace (if any) in val()
@@ -21,13 +21,13 @@ var TaskCreationView = marionette.ItemView.extend({
 
         // Check for enter key press & if string is defined.
         if (event.which === keys.ENTER_KEY && taskString) {
-            TaskList.create({
+            this.collection.add({
                 title: taskString
             })
         }
     }
 });
 
-exports.TaskCreationView = TaskCreationView;
+exports.HeaderView = HeaderView;
 
 });

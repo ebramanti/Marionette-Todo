@@ -2,11 +2,17 @@
 <html lang="en-US">
     <head>
         <meta charset="utf-8">
-        <title>default title</title>
+        <title>Task App: Get Stuff Done</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" media="all" href="static/css/styles.css"/>
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+        <!--<![endif]-->
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <script type="text/javascript" src="static/js/vendor/require.js"></script>
         <script type="text/javascript">
@@ -16,11 +22,12 @@
         </script>
     </head>
     <body>
-        <!--<div id="modal"></div>
-        <div id="activity"></div>
-        <div id="window"></div>-->
-        <div id="header-view"></div>
-        <div id="list-view"></div>
-        <div id="footer-view"></div>
+        <div class='pure-g'>
+            <div class='pure-u-1'>
+                <div id="header-view"></div>
+                <div id="list-view"></div>
+                <div id="footer-view"></div>
+            </div>
+        </div>
     </body>
 </html>

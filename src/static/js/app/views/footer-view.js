@@ -7,19 +7,28 @@ var keys = require('app/enums/keys').keys;
 var FooterView = Backbone.Marionette.Layout.extend({
     template: template,
     ui: {
-        filters: ''
+
     },
 
     events: {
-
+        'click #clear-completed': 'onClearCompleted'
     },
 
-    initialize: function() {
-        // TODO need a way to listen to the collection
+    initialize: function(options) {
+        this.collection = options.collection;
     },
 
     onRender: function() {
         // TODO
+    },
+
+    onClearCompleted: function() {
+        function destroy(task) {
+            task.destroy();
+        }
+        this.collection.completedTasks().forEach(function(model) {
+            model.destroy();
+        });
     }
 });
 

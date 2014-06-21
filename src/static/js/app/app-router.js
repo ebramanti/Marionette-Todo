@@ -8,7 +8,7 @@ var AppRouter  =  marionette.AppRouter.extend({
     appRoutes:{
         '*index':'index',
         // Filters tasks by active/completed.
-        // TODO '*filterTasks': 'taskListFilter'
+        '*filter': 'taskListFilter'
     }
 });
 

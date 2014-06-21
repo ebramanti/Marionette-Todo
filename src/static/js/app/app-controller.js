@@ -33,12 +33,22 @@ var AppController = marionette.Controller.extend({
         this.app.footerRegion.show(new FooterView({
             collection: this.collection
         }));
+        // Hides list and footer if there are no values.
+        this.listenTo(this.collection, 'all', function() {
+            if (this.collection.length === 0) {
+                app.listRegion.$el.hide();
+                app.footerRegion.$el.hide();
+            } else {
+                app.listRegion.$el.show();
+                app.footerRegion.$el.show();
+            }
+        })
     },
 
     // A filter for task lists, so that users can filter
     // between active and completed tasks.
     taskListFilter: function(filter) {
-        // TODO
+        app.trigger('')
     },
 
     index: function() {

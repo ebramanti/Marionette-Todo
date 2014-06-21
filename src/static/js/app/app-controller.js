@@ -48,7 +48,10 @@ var AppController = marionette.Controller.extend({
     // A filter for task lists, so that users can filter
     // between active and completed tasks.
     taskListFilter: function(filter) {
-        app.trigger('')
+        app.vent.on('todoList:filter',function(filter) {
+            filter = filter || 'all';
+            $('#todoapp').attr('class', 'filter-' + filter);
+        });
     },
 
     index: function() {

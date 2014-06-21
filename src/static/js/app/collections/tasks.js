@@ -15,6 +15,9 @@ var Tasks =  backbone.Collection.extend({
         return this.filter(function(task) {
             return task.get('isActive')
         })
+    },
+    numOfActiveTasks: function() {
+        return this.activeTasks().length();
     }
 });
 

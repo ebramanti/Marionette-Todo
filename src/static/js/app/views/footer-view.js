@@ -7,7 +7,7 @@ var keys = require('app/enums/keys').keys;
 var FooterView = Backbone.Marionette.Layout.extend({
     template: template,
     ui: {
-
+        numberActive: '#tasklist strong'
     },
 
     events: {
@@ -16,19 +16,23 @@ var FooterView = Backbone.Marionette.Layout.extend({
 
     initialize: function(options) {
         this.collection = options.collection;
+        //this.collection.on('change:isActive', this.updateActive());
     },
 
     onRender: function() {
-        // TODO
+        //this.updateActive();
     },
 
     onClearCompleted: function() {
-        function destroy(task) {
-            task.destroy();
-        }
         this.collection.completedTasks().forEach(function(model) {
             model.destroy();
         });
+    },
+
+    updateActive: function() {
+        // TODO
+        console.log(this.collection.activeTasks().length);
+        //this.ui.numberActive.html(this.collection.activeTasks().length);
     }
 });
 

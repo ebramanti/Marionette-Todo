@@ -5,7 +5,7 @@ var ItemView = require('app/views/item-view').ItemView;
 var template = require('hbs!../templates/list-view');
 
 var ListView =  marionette.CollectionView.extend({
-    tagName: 'ul',
+    tagName: "ul id='task-list'",
     itemView : ItemView,
     itemViewContainer: '#task-list',
     initialize : function(){

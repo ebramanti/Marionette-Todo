@@ -9,6 +9,7 @@ var ItemView = marionette.ItemView.extend({
     template : template,
     ui: {
         edit: '.edit',
+        input: '.editor',
         remove: '.remove',
         title: '.title'
     },
@@ -23,11 +24,43 @@ var ItemView = marionette.ItemView.extend({
     initialize: function(options) {
         this.collection = options.collection;
         this.model = options.model;
-        console.log(this.model);
+        // This creates a listener for 'change' events.
+        // Specifically, whenever we change the title of the task.
+        this.listenTo(this.model, 'change:title', this.render);
     },
 
     // On show, set all of the different completed or active states.
     onShow: function() {
+        this.toggleClass();
+    },
+
+    editClick: function() {
+        var editBoxHidden = this.ui.input.css('display') === 'none'
+        if (editBoxHidden) {
+            this.ui.input.show();
+            this.ui.input.focus();
+        } else {
+            this.ui.input.hide();
+        }
+    },
+
+    // Almost exact same logic as TaskCreation's 'onInputConfirm'.
+    editAccept: function() {
+        var taskString = this.ui.input.val().trim();
+        if (event.which === keys.ENTER_KEY && taskString) {
+            this.model.set('title', taskString);
+            console.log(this.model.get('title'));
+            this.ui.input.val('');
+            this.ui.input.hide();
+        }
+    },
+
+    switchState: function() {
+        this.model.toggleIsActive();
+        this.toggleClass();
+    },
+
+    toggleClass: function() {
         this.$el.removeClass('active completed')
         var isActive = this.model.get('isActive');
         if (isActive) {
@@ -35,27 +68,6 @@ var ItemView = marionette.ItemView.extend({
         } else {
             this.$el.addClass('completed');
         }
-    },
-
-    editClick: function() {
-        console.log("I'm here.");
-        this.$el.addClass('editor');
-        //this.ui.editor.focus(); // focus in JQuery snaps it to that element
-    },
-
-    // Almost exact same logic as TaskCreation's 'onInputConfirm'.
-    editAccept: function() {
-        var taskString = this.ui.input.val().trim();
-        if (event.which === keys.ENTER_KEY && taskString) {
-            this.model.set('title', taskString).save();
-            this.$el.removeClass('editor')
-        }
-    },
-
-    switchState: function() {
-        this.model.toggleIsActive();
-        // TODO switch div class like 'onRender' function
-        // whenever this is called.
     },
 
     wantsRemove: function() {

@@ -9,7 +9,7 @@ var keys = require('built/app/keys');
 var app = require('app/app');
 
 var HeaderView = require('app/views/header-view').HeaderView;
-var FooterView = require('app/views/footer-view').FooterView;
+var ListLayout = require('app/views/list-layout').ListLayout;
 var ListView = require('app/views/list-view').ListView;
 
 var Task = require('app/models/task').Task;
@@ -23,35 +23,26 @@ var AppController = marionette.Controller.extend({
         // You can customize that as necessary.
         this.BUILT();
         this.app = app;
-        this.collection = new Tasks();
-        this.app.headerRegion.show(new HeaderView({
-            collection: this.collection
-        }));
-        this.app.listRegion.show(new ListView({
-            collection: this.collection
-        }));
-        this.app.footerRegion.show(new FooterView({
-            collection: this.collection
-        }));
+
+        this.masterCollection = new Tasks();
+        this.masterCollection.comparator = 'isActive'
+
         // Hides list and footer if there are no values.
-        this.listenTo(this.collection, 'all', function() {
-            if (this.collection.length === 0) {
+        /*this.listenTo(this.masterCollection, 'all', function() {
+            if (this.masterCollection.length === 0) {
                 app.listRegion.$el.hide();
-                app.footerRegion.$el.hide();
             } else {
                 app.listRegion.$el.show();
-                app.footerRegion.$el.show();
             }
-        })
-    },
+        }) */
 
-    // A filter for task lists, so that users can filter
-    // between active and completed tasks.
-    taskListFilter: function(filter) {
-        app.vent.on('todoList:filter',function(filter) {
-            filter = filter || 'all';
-            $('#todoapp').attr('class', 'filter-' + filter);
-        });
+        this.app.headerRegion.show(new HeaderView({
+            collection: this.masterCollection
+        }));
+        this.app.listRegion.show(new ListLayout({
+            collection: this.masterCollection
+        }));
+        //app.listRegion.$el.hide();
     },
 
     index: function() {

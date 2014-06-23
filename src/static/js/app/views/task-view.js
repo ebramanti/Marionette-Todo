@@ -1,10 +1,10 @@
 define(function (require, exports, module) {
 
 var marionette = require('marionette');
-var template = require('hbs!../templates/item-view');
+var template = require('hbs!../templates/task-view');
 var keys = require('app/enums/keys').keys;
 
-var ItemView = marionette.ItemView.extend({
+var TaskView = marionette.ItemView.extend({
     tagName: 'li',
     template : template,
     ui: {
@@ -22,7 +22,7 @@ var ItemView = marionette.ItemView.extend({
         'click .changeStatus': 'switchState'
     },
     initialize: function(options) {
-        this.collection = options.collection;
+        this.masterCollection = options.masterCollection;
         this.model = options.model;
         // This creates a listener for 'change' events.
         // Specifically, whenever we change the title of the task.
@@ -37,8 +37,7 @@ var ItemView = marionette.ItemView.extend({
     editClick: function() {
         var editBoxHidden = this.ui.input.css('display') === 'none'
         if (editBoxHidden) {
-            this.ui.input.show();
-            this.ui.input.focus();
+            this.ui.input.show().focus();
         } else {
             this.ui.input.hide();
         }
@@ -79,6 +78,6 @@ var ItemView = marionette.ItemView.extend({
     }
 });
 
-exports.ItemView = ItemView;
+exports.TaskView = TaskView;
 
 });

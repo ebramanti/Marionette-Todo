@@ -2,13 +2,18 @@
 define(function( require, exports, module ){
 
 var backbone = require('backbone');
+
+var Status = {
+    Active: 'active',
+    Completed: 'completed'
+}
+
 var Task = backbone.Model.extend({
     defaults: {
-        //empty when user creates a task
-        title: '',
+        title: null,
 
         isActive: true,
-        date: undefined
+        date: null
     },
     initialize: function() {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
@@ -16,9 +21,11 @@ var Task = backbone.Model.extend({
     },
     toggleIsActive: function() {
         this.set('isActive', !this.get('isActive'));
+        console.log(this.get('isActive') ? Status.Active : Status.Completed);
     }
 });
 
 exports.Task = Task;
+exports.Status = Status;
 
 });

@@ -5,8 +5,7 @@ define(function(require, exports, module) {
 
     app.addRegions({
         headerRegion: '#header-view',
-        listRegion: '#list-view',
-        footerRegion: '#footer-view'
+        listRegion: '#list-view'
     });
 
     app.addInitializer(function() {

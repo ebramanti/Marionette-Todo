@@ -1,13 +1,15 @@
+<input id='toggle-all' type='checkbox'>
+<ul id='task-list'></ul>
 <div class="pure-menu pure-menu-open pure-menu-horizontal">
     <ul id='filters'>
         <li>
-            <a href='#/'>All Tasks</a>
+            <a class='filter' data-status='*'>All Tasks</a>
         </li>
         <li>
-            <a href='#/active'>Active Tasks</a>
+            <a class='filter' data-status='{{Status.Active}}'>Active Tasks</a>
         </li>
         <li>
-            <a href='#/completed'>Completed Tasks</a>
+            <a class='filter' data-status='{{Status.Completed}}'>Completed Tasks</a>
         </li>
     </ul>
     <button class='pure-button primary-button' id='clear-completed'>Clear Completed</button>

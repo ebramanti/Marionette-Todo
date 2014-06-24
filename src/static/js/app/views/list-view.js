@@ -23,13 +23,14 @@ var ListView =  marionette.CollectionView.extend({
             this.listenTo(this.masterCollection, 'add', this.onTaskAdd);
         }
 
-        this.listenTo(this.masterCollection, 'change:isActive', this.onActiveChange);
+        if(this.collection !== this.masterCollection){
+            this.listenTo(this.masterCollection, 'change:isActive', this.onActiveChange);
+        }
     },
 
     onTaskAdd: function(model) {
         var activeFilter = (this.filterBy === Status.Active && model.get('isActive'));
         var completedFilter = (this.filterBy === Status.Completed && !model.get('isActive'));
-        console.log(completedFilter);
         if(activeFilter || completedFilter) {
             // This will initialize a collection attribute
             this.collection.add(model);
@@ -37,18 +38,12 @@ var ListView =  marionette.CollectionView.extend({
     },
 
     onActiveChange: function(model) {
-        console.log(this.masterCollection === this.collection)
         var localCollectionModel = this.collection.get(model.cid);
-        console.log(localCollectionModel);
         if (this.collection.get(localCollectionModel)) {
             this.collection.remove(localCollectionModel);
         } else {
-            this.collection.add(localCollectionModel);
+            this.collection.add(model);
         }
-        console.log("Master Collection " + this.filterNumber);
-        console.log(this.masterCollection);
-        console.log("Local Collection " + this.filterNumber);
-        console.log(this.collection);
     }
 
 });

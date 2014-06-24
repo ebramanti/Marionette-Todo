@@ -11,6 +11,7 @@ var ListView =  marionette.CollectionView.extend({
     initialize : function(options) {
         this.masterCollection = options.masterCollection;
         this.collection = options.collection;
+        this.collection.comparator = 'title';
         this.filterBy = options.filterBy || null;
         this.filterNumber = options.filterNumber;
 

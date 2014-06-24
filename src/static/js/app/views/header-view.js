@@ -13,7 +13,7 @@ var HeaderView = marionette.ItemView.extend({
         'keypress #new-task': 'onInputConfirm'
     },
     initialize : function(options){
-        this.collection = options.collection
+        this.masterCollection = options.collection
     },
     onInputConfirm: function(event) {
         // trim() trims whitespace (if any) in val()
@@ -27,7 +27,7 @@ var HeaderView = marionette.ItemView.extend({
         }
     },
     createTask: function(name) {
-        this.collection.add({
+        this.masterCollection.add({
             title: name
         })
     }

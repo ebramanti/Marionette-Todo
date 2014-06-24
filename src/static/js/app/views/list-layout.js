@@ -14,12 +14,14 @@ var Status = require('app/models/task').Status;
 var ListLayout = Backbone.Marionette.Layout.extend({
     template: template,
     ui: {
-        numberActive: '#tasklist strong'
+        numberActive: '#tasklist strong',
+        toggleAll: '#toggle-all'
     },
 
     events: {
         'click #clear-completed': 'wantsClearCompleted',
-        'click .filter': 'wantsChangeFilter'
+        'click .filter': 'wantsChangeFilter',
+        'click #toggle-all': 'onToggleAll'
     },
 
     regions: {
@@ -30,6 +32,14 @@ var ListLayout = Backbone.Marionette.Layout.extend({
         this.masterCollection = options.collection;
         this.partitions = this.createTaskPartitions(this.masterCollection);
         this.currentCollectionView = null;
+        this.numActive = 0;
+
+        // Listener designed to keep track of number of active/completed tasks of master collection.
+        this.listenTo(this.masterCollection, 'all', function() {
+            this.numActive = this.masterCollection.numOfActiveTasks();
+            this.numCompleted = this.masterCollection.numOfCompletedTasks();
+            console.log('Active: ' + this.numActive + ' --- Completed: ' + this.numCompleted);
+        });
     },
 
     createTaskPartitions: function(tasks) {
@@ -67,12 +77,7 @@ var ListLayout = Backbone.Marionette.Layout.extend({
         if (view !== this.currentCollectionView) {
             this.filtered.show(view, {preventClose: true});
             this.currentCollectionView = view;
-            this.updateChecked(view);
         }
-    },
-
-    updateChecked: function(view) {
-
     },
 
     wantsClearCompleted: function() {
@@ -89,11 +94,6 @@ var ListLayout = Backbone.Marionette.Layout.extend({
         return {Status: Status}
     },
 
-    updateActive: function() {
-        // TODO
-        console.log(this.collection.activeTasks().length);
-    },
-
     wantsChangeFilter: function(event) {
         var $target = $(event.currentTarget);
         var status = $target.data('status');
@@ -101,6 +101,15 @@ var ListLayout = Backbone.Marionette.Layout.extend({
         var view = this.partitions[status] || null;
 
         if (view) this.showCollection(view);
+    },
+
+    onToggleAll: function(event) {
+        this.masterCollection.forEach(function(model) {
+            var toggle = !event.currentTarget.checked
+            model.set('isActive', toggle);
+        })
+        // Ask about using this function here to update.
+        this.filtered.show(this.currentCollectionView);
     }
 });
 

@@ -17,7 +17,10 @@ var Tasks =  backbone.Collection.extend({
         })
     },
     numOfActiveTasks: function() {
-        return this.activeTasks().length();
+        return this.activeTasks().length;
+    },
+    numOfCompletedTasks: function() {
+        return this.completedTasks().length;
     }
 });
 

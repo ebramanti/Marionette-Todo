@@ -11,7 +11,8 @@ var TaskView = marionette.ItemView.extend({
         edit: '.edit',
         input: '.editor',
         remove: '.remove',
-        title: '.title'
+        title: '.title',
+        checkbox: '.changeStatus'
     },
     // Four possible events: remove, edit, accept edit,
     // & active/completed state switching.
@@ -35,7 +36,7 @@ var TaskView = marionette.ItemView.extend({
     },
 
     editClick: function() {
-        var editBoxHidden = this.ui.input.css('display') === 'none'
+        var editBoxHidden = this.ui.input.css('display') === 'none';
         if (editBoxHidden) {
             this.ui.input.show().focus();
         } else {
@@ -64,8 +65,10 @@ var TaskView = marionette.ItemView.extend({
         var isActive = this.model.get('isActive');
         if (isActive) {
             this.$el.addClass('active');
+            this.ui.checkbox.attr('checked', false);
         } else {
             this.$el.addClass('completed');
+            this.ui.checkbox.attr('checked', true);
         }
     },
 

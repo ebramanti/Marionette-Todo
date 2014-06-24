@@ -7,6 +7,7 @@ var modals = require('built/app/modals');
 var activity = require('built/app/activity');
 var keys = require('built/app/keys');
 var app = require('app/app');
+var backbone = require('backbone');
 
 var HeaderView = require('app/views/header-view').HeaderView;
 var ListLayout = require('app/views/list-layout').ListLayout;

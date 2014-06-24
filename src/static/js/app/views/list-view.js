@@ -10,7 +10,9 @@ var ListView =  marionette.CollectionView.extend({
 
     initialize : function(options) {
         this.masterCollection = options.masterCollection;
+        this.collection = options.collection;
         this.filterBy = options.filterBy || null;
+        this.filterNumber = options.filterNumber;
 
         // Check for a collection, this is required in a view of a task list.
         if (!this.masterCollection) {
@@ -21,7 +23,7 @@ var ListView =  marionette.CollectionView.extend({
             this.listenTo(this.masterCollection, 'add', this.onTaskAdd);
         }
 
-        this.listenTo(this.masterCollection, 'change: isActive', this.onActiveChange);
+        this.listenTo(this.masterCollection, 'change:isActive', this.onActiveChange);
     },
 
     onTaskAdd: function(model) {
@@ -35,9 +37,18 @@ var ListView =  marionette.CollectionView.extend({
     },
 
     onActiveChange: function(model) {
-
-        //var changingTask = this.collection.find(model.name);
-        //var switched = !changingTask.get('isActive');
+        console.log(this.masterCollection === this.collection)
+        var localCollectionModel = this.collection.get(model.cid);
+        console.log(localCollectionModel);
+        if (this.collection.get(localCollectionModel)) {
+            this.collection.remove(localCollectionModel);
+        } else {
+            this.collection.add(localCollectionModel);
+        }
+        console.log("Master Collection " + this.filterNumber);
+        console.log(this.masterCollection);
+        console.log("Local Collection " + this.filterNumber);
+        console.log(this.collection);
     }
 
 });

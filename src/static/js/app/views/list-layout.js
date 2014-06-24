@@ -37,19 +37,22 @@ var ListLayout = Backbone.Marionette.Layout.extend({
 
         var all = new ListView({
             masterCollection: tasks,
-            collection: tasks
+            collection: tasks,
+            filterNumber: 1
         });
 
         var active = new ListView({
             masterCollection: tasks,
             filterBy: Status.Active,
-            collection: new Tasks(tasks.where({status: Status.Active}))
+            collection: new Tasks(tasks.where({status: Status.Active})),
+            filterNumber: 2
         });
 
         var completed = new ListView({
             masterCollection: tasks,
             filterBy: Status.completed,
-            collection: new Tasks(tasks.where({status: Status.Completed}))
+            collection: new Tasks(tasks.where({status: Status.Completed})),
+            filterNumber: 3
         });
 
         partitions['*'] = all;

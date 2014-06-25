@@ -1,17 +1,12 @@
-<input id='toggle-all' type='checkbox'>
-<ul id='task-list'></ul>
-<div class="pure-menu pure-menu-open pure-menu-horizontal">
-    <ul id='filters'>
-        <li>
-            <a class='filter' data-status='*'>All Tasks</a>
-        </li>
-        <li>
-            <a class='filter' data-status='{{Status.Active}}'>Active Tasks</a>
-        </li>
-        <li>
-            <a class='filter' data-status='{{Status.Completed}}'>Completed Tasks</a>
-        </li>
-    </ul>
-    <button class='pure-button primary-button' id='clear-completed'>Clear Completed</button>
-    <span id='active-count'><strong></strong> items left</span>
-</div>
+<ul class='todo-list' id='task-list'></ul>
+<ul class='todo-list' id='filters'>
+    <li id='check-done'>
+        <a class='toggle' id='toggle-all'></a>
+        <button class='filter previous' data-status='*'>All Tasks</button>
+        <button class='filter' data-status='{{Status.Active}}'>Active Tasks</button>
+        <button class='filter' data-status='{{Status.Completed}}'>Completed Tasks</button>
+        <button id='clear-completed'>Clear Completed</button>
+        <span id='active-count'><strong></strong> items left</span>
+    </li>
+</ul>
+

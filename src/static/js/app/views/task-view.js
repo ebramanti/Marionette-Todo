@@ -61,14 +61,14 @@ var TaskView = marionette.ItemView.extend({
     },
 
     toggleClass: function() {
-        this.$el.removeClass('active completed')
+        this.$el.removeClass('active completed done')
         var isActive = this.model.get('isActive');
         if (isActive) {
             this.$el.addClass('active');
-            this.ui.checkbox.attr('checked', false);
+            //this.ui.checkbox.attr('checked', false);
         } else {
-            this.$el.addClass('completed');
-            this.ui.checkbox.attr('checked', true);
+            this.$el.addClass('completed done');
+            //this.ui.checkbox.attr('checked', true);
         }
     },
 

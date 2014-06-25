@@ -6,6 +6,7 @@ var keys = require('app/enums/keys').keys;
 
 var HeaderView = marionette.ItemView.extend({
     template : template,
+    tagName: 'ul',
     ui: {
         input: '#new-task'
     },

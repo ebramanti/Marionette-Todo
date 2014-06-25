@@ -14,9 +14,11 @@ var Status = require('app/models/task').Status;
 
 var ListLayout = Backbone.Marionette.Layout.extend({
     template: template,
+    tagName: 'ul',
     ui: {
         numberActive: '#active-count strong',
-        toggleAll: '#toggle-all'
+        toggleAll: '#toggle-all',
+        checkDone: '#check-done'
     },
 
     events: {
@@ -106,10 +108,15 @@ var ListLayout = Backbone.Marionette.Layout.extend({
     },
 
     onToggleAll: function(event) {
+        var toggle = this.ui.checkDone.hasClass('done');
         this.masterCollection.forEach(function(model) {
-            var toggle = !event.currentTarget.checked
             model.set('isActive', toggle);
-        })
+        });
+        if (toggle) {
+            this.ui.checkDone.removeClass('done');
+        } else {
+            this.ui.checkDone.addClass('done');
+        }
         // Updates the current collection view.
         this.currentCollectionView.render();
     }

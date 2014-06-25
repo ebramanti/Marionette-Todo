@@ -26,7 +26,6 @@ var AppController = marionette.Controller.extend({
         this.app = app;
 
         this.masterCollection = new Tasks();
-        this.masterCollection.comparator = 'isActive'
 
         // Hides list and footer if there are no values.
         this.listenTo(this.masterCollection, 'all', function() {

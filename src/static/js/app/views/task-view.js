@@ -27,7 +27,7 @@ var TaskView = marionette.ItemView.extend({
         this.model = options.model;
         // This creates a listener for 'change' events.
         // Specifically, whenever we change the title of the task.
-        this.listenTo(this.model, 'change:title', this.render);
+        this.listenTo(this.model, 'change', this.render);
     },
 
     // On show, set all of the different completed or active states.

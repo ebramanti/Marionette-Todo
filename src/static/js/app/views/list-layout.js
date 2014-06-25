@@ -3,6 +3,7 @@ define(function (require, exports, module) {
 var marionette = require('marionette');
 var template = require('hbs!../templates/list-layout');
 var keys = require('app/enums/keys').keys;
+var Handlebars = require('handlebars')
 
 var Task = require('app/models/task').Task;
 var Tasks = require('app/collections/tasks').Tasks;
@@ -14,7 +15,7 @@ var Status = require('app/models/task').Status;
 var ListLayout = Backbone.Marionette.Layout.extend({
     template: template,
     ui: {
-        numberActive: '#tasklist strong',
+        numberActive: '#active-count strong',
         toggleAll: '#toggle-all'
     },
 
@@ -39,6 +40,7 @@ var ListLayout = Backbone.Marionette.Layout.extend({
             this.numActive = this.masterCollection.numOfActiveTasks();
             this.numCompleted = this.masterCollection.numOfCompletedTasks();
             console.log('Active: ' + this.numActive + ' --- Completed: ' + this.numCompleted);
+            this.ui.numberActive.text(this.numActive);
         });
     },
 
@@ -108,8 +110,8 @@ var ListLayout = Backbone.Marionette.Layout.extend({
             var toggle = !event.currentTarget.checked
             model.set('isActive', toggle);
         })
-        // Ask about using this function here to update.
-        this.filtered.show(this.currentCollectionView);
+        // Updates the current collection view.
+        this.currentCollectionView.render();
     }
 });
 

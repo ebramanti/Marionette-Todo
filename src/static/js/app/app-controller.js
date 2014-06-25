@@ -29,13 +29,13 @@ var AppController = marionette.Controller.extend({
         this.masterCollection.comparator = 'isActive'
 
         // Hides list and footer if there are no values.
-        /*this.listenTo(this.masterCollection, 'all', function() {
+        this.listenTo(this.masterCollection, 'all', function() {
             if (this.masterCollection.length === 0) {
                 app.listRegion.$el.hide();
             } else {
                 app.listRegion.$el.show();
             }
-        }) */
+        })
 
         this.app.headerRegion.show(new HeaderView({
             collection: this.masterCollection
@@ -43,7 +43,6 @@ var AppController = marionette.Controller.extend({
         this.app.listRegion.show(new ListLayout({
             collection: this.masterCollection
         }));
-        //app.listRegion.$el.hide();
     },
 
     index: function() {

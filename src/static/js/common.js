@@ -2,7 +2,7 @@ require.config({
   baseUrl: 'static/js',
 
   paths : {
-    'marionette': 'vendor/backbone/marionette',
+    'marionette': 'vendor/backbone/marionette'
   },
 
    packages: [
@@ -58,6 +58,11 @@ require.config({
         'exports': 'Backbone'
     },
 
+    'backbone.localStorage': {
+        'deps': ['backbone'],
+        'exports': 'Backbone'
+    },
+
     'backbone/stickit' : {
       'deps' : ['backbone'],
       'exports' : 'Stickit'
@@ -73,7 +78,7 @@ require.config({
         'exports': 'Marionette'
     }
   },
-  
+
   // introduced in requirejs 2.1.11, helps Backbone along.
   // http://jrburke.com/2014/02/16/requirejs-2.1.11-released/
   wrapShim: true,

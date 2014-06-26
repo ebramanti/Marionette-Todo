@@ -92,6 +92,7 @@ var ListLayout = Backbone.Marionette.Layout.extend({
         this.collection.completedTasks().forEach(function(model) {
             model.destroy();
         });
+        this.ui.checkDone.removeClass('done');
     },
 
     serializeData: function() {

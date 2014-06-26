@@ -1,8 +1,8 @@
 define(function (require, exports, module) {
 
 var marionette = require('marionette');
+
 var TaskView = require('app/views/task-view').TaskView;
-var template = require('hbs!../templates/list-view');
 var Status = require('app/models/task').Status;
 
 var ListView =  marionette.CollectionView.extend({
@@ -13,7 +13,6 @@ var ListView =  marionette.CollectionView.extend({
         this.collection = options.collection;
         this.collection.comparator = 'title';
         this.filterBy = options.filterBy || null;
-        this.filterNumber = options.filterNumber;
 
         // Check for a collection, this is required in a view of a task list.
         if (!this.masterCollection) {
@@ -21,21 +20,29 @@ var ListView =  marionette.CollectionView.extend({
         }
 
         if (this.filterBy) {
-            this.listenTo(this.masterCollection, 'add', this.onTaskAdd);
+            this.listenTo(this.masterCollection, 'add', this.wantsTaskAdd);
         }
 
-        if(this.collection !== this.masterCollection){
-            this.listenTo(this.masterCollection, 'change:isActive', this.onActiveChange);
+        if (this.collection !== this.masterCollection){
+            this.listenTo(this.masterCollection, 'change:isActive', this.wantsActiveChange);
         }
+    },
+
+    wantsTaskAdd: function(model) {
+        this.onTaskAdd(model);
     },
 
     onTaskAdd: function(model) {
         var activeFilter = (this.filterBy === Status.Active && model.get('isActive'));
         var completedFilter = (this.filterBy === Status.Completed && !model.get('isActive'));
-        if(activeFilter || completedFilter) {
+        if (activeFilter || completedFilter) {
             // This will initialize a collection attribute
             this.collection.add(model);
         }
+    },
+
+    wantsActiveChange: function(model) {
+        this.onActiveChange(model);
     },
 
     onActiveChange: function(model) {

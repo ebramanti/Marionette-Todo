@@ -11,7 +11,6 @@ var backbone = require('backbone');
 
 var HeaderView = require('app/views/header-view').HeaderView;
 var ListLayout = require('app/views/list-layout').ListLayout;
-var ListView = require('app/views/list-view').ListView;
 
 var Task = require('app/models/task').Task;
 var Tasks = require('app/collections/tasks').Tasks;
@@ -27,6 +26,13 @@ var AppController = marionette.Controller.extend({
 
         this.masterCollection = new Tasks();
 
+        this.app.headerRegion.show(new HeaderView({
+            collection: this.masterCollection
+        }));
+        this.app.listRegion.show(new ListLayout({
+            collection: this.masterCollection
+        }));
+
         // Hides list and footer if there are no values.
         this.listenTo(this.masterCollection, 'all', function() {
             if (this.masterCollection.length === 0) {
@@ -34,14 +40,7 @@ var AppController = marionette.Controller.extend({
             } else {
                 app.listRegion.$el.show();
             }
-        })
-
-        this.app.headerRegion.show(new HeaderView({
-            collection: this.masterCollection
-        }));
-        this.app.listRegion.show(new ListLayout({
-            collection: this.masterCollection
-        }));
+        });
     },
 
     index: function() {

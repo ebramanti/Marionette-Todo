@@ -11,7 +11,6 @@ var Status = {
 var Task = backbone.Model.extend({
     defaults: {
         title: null,
-
         isActive: true,
         date: null
     },
@@ -21,7 +20,6 @@ var Task = backbone.Model.extend({
     },
     toggleIsActive: function() {
         this.set('isActive', !this.get('isActive'));
-        console.log(this.get('isActive') ? Status.Active : Status.Completed);
     }
 });
 

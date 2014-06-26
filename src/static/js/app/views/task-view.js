@@ -25,8 +25,6 @@ var TaskView = marionette.ItemView.extend({
     initialize: function(options) {
         this.masterCollection = options.masterCollection;
         this.model = options.model;
-        // This creates a listener for 'change' events.
-        // Specifically, whenever we change the title of the task.
         this.listenTo(this.model, 'change', this.render);
     },
 
@@ -65,10 +63,8 @@ var TaskView = marionette.ItemView.extend({
         var isActive = this.model.get('isActive');
         if (isActive) {
             this.$el.addClass('active');
-            //this.ui.checkbox.attr('checked', false);
         } else {
             this.$el.addClass('completed done');
-            //this.ui.checkbox.attr('checked', true);
         }
     },
 

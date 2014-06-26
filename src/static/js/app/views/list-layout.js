@@ -3,11 +3,8 @@ define(function (require, exports, module) {
 var marionette = require('marionette');
 var template = require('hbs!../templates/list-layout');
 var keys = require('app/enums/keys').keys;
-var Handlebars = require('handlebars')
 
-var Task = require('app/models/task').Task;
 var Tasks = require('app/collections/tasks').Tasks;
-
 var ListView = require('app/views/list-view').ListView;
 
 var Status = require('app/models/task').Status;
@@ -24,7 +21,7 @@ var ListLayout = Backbone.Marionette.Layout.extend({
     events: {
         'click #clear-completed': 'wantsClearCompleted',
         'click .filter': 'wantsChangeFilter',
-        'click #toggle-all': 'onToggleAll'
+        'click #toggle-all': 'wantsToggleAll'
     },
 
     regions: {
@@ -41,7 +38,14 @@ var ListLayout = Backbone.Marionette.Layout.extend({
         this.listenTo(this.masterCollection, 'all', function() {
             this.numActive = this.masterCollection.numOfActiveTasks();
             this.numCompleted = this.masterCollection.numOfCompletedTasks();
-            console.log('Active: ' + this.numActive + ' --- Completed: ' + this.numCompleted);
+
+            // Check if all tasks are completed, and check complete-all if so.
+            if (this.numActive < 1) {
+                this.ui.checkDone.addClass('done');
+            } else {
+                this.ui.checkDone.removeClass('done');
+            }
+
             this.ui.numberActive.text(this.numActive);
         });
     },
@@ -95,31 +99,38 @@ var ListLayout = Backbone.Marionette.Layout.extend({
         this.ui.checkDone.removeClass('done');
     },
 
-    serializeData: function() {
-        return {Status: Status}
+    wantsChangeFilter: function(event) {
+        this.onChangeFilter(event);
     },
 
-    wantsChangeFilter: function(event) {
+    onChangeFilter: function(event) {
         var $target = $(event.currentTarget);
         var status = $target.data('status');
-        console.log(status);
         var view = this.partitions[status] || null;
 
         if (view) this.showCollection(view);
     },
 
+    wantsToggleAll: function(event) {
+        this.onToggleAll(event);
+    },
+
     onToggleAll: function(event) {
-        var toggle = this.ui.checkDone.hasClass('done');
+        var toggled = this.ui.checkDone.hasClass('done');
         this.masterCollection.forEach(function(model) {
-            model.set('isActive', toggle);
+            model.set('isActive', toggled);
         });
-        if (toggle) {
+        if (toggled) {
             this.ui.checkDone.removeClass('done');
         } else {
             this.ui.checkDone.addClass('done');
         }
         // Updates the current collection view.
         this.currentCollectionView.render();
+    },
+
+    serializeData: function() {
+        return {Status: Status}
     }
 });
 

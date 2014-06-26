@@ -2,6 +2,7 @@
 define(function( require, exports, module ){
 
 var backbone = require('backbone');
+var LocalStorage = require('backbone/localstorage');
 
 var Status = {
     Active: 'active',
@@ -9,6 +10,7 @@ var Status = {
 }
 
 var Task = backbone.Model.extend({
+    localStorage: new LocalStorage('task-list'),
     defaults: {
         title: null,
         isActive: true,

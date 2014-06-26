@@ -41,6 +41,7 @@ var AppController = marionette.Controller.extend({
                 app.listRegion.$el.show();
             }
         });
+        this.masterCollection.fetch();
     },
 
     index: function() {

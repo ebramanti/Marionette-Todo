@@ -48,9 +48,6 @@ var ListLayout = Backbone.Marionette.Layout.extend({
 
             this.ui.numberActive.text(this.numActive);
         });
-        this.partitions.forEach(function(collection) {
-            collection.fetch();
-        });
     },
 
     createTaskPartitions: function(tasks) {

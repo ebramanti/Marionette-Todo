@@ -10,7 +10,7 @@ var Status = {
 }
 
 var Task = backbone.Model.extend({
-    //localStorage: new LocalStorage('task-list'),
+    localStorage: new LocalStorage('task-list'),
     defaults: {
         title: null,
         isActive: true,

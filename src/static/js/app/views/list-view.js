@@ -25,6 +25,7 @@ var ListView =  marionette.CollectionView.extend({
 
         if (this.collection !== this.masterCollection){
             this.listenTo(this.masterCollection, 'change:isActive', this.wantsActiveChange);
+            this.collection.fetch();
         }
     },
 

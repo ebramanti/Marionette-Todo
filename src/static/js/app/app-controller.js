@@ -25,6 +25,7 @@ var AppController = marionette.Controller.extend({
         this.app = app;
 
         this.masterCollection = new Tasks();
+        this.masterCollection.fetch();
 
         this.app.headerRegion.show(new HeaderView({
             collection: this.masterCollection

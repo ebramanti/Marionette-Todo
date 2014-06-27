@@ -32,7 +32,6 @@ var ListLayout = Backbone.Marionette.Layout.extend({
         this.masterCollection = options.collection;
         this.partitions = this.createTaskPartitions(this.masterCollection);
         this.currentCollectionView = null;
-        this.numActive = 0;
 
         // Listener designed to keep track of number of active/completed tasks of master collection.
         this.listenTo(this.masterCollection, 'all', function() {
@@ -61,13 +60,13 @@ var ListLayout = Backbone.Marionette.Layout.extend({
         var active = new ListView({
             masterCollection: tasks,
             filterBy: Status.Active,
-            collection: new Tasks(tasks.where({status: Status.Active}))
+            collection: new Tasks(tasks.where({isActive: true}))
         });
 
         var completed = new ListView({
             masterCollection: tasks,
-            filterBy: Status.completed,
-            collection: new Tasks(tasks.where({status: Status.Completed}))
+            filterBy: Status.Completed,
+            collection: new Tasks(tasks.where({isActive: false}))
         });
 
         partitions['*'] = all;
@@ -79,9 +78,15 @@ var ListLayout = Backbone.Marionette.Layout.extend({
 
     onShow: function() {
         this.showCollection(this.partitions['*']);
+        this.numActive = this.masterCollection.numOfActiveTasks();
+        this.ui.numberActive.text(this.numActive);
+        if (this.numActive < 1) {
+            this.ui.checkDone.addClass('done');
+        }
     },
 
     showCollection: function(view) {
+        console.log(view.collection.models)
         if (view !== this.currentCollectionView) {
             this.filtered.show(view, {preventClose: true});
             this.currentCollectionView = view;
@@ -118,7 +123,7 @@ var ListLayout = Backbone.Marionette.Layout.extend({
     onToggleAll: function(event) {
         var toggled = this.ui.checkDone.hasClass('done');
         this.masterCollection.forEach(function(model) {
-            model.set('isActive', toggled);
+            model.set('isActive', toggled).save();
         });
         if (toggled) {
             this.ui.checkDone.removeClass('done');

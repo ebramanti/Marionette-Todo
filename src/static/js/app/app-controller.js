@@ -25,6 +25,7 @@ var AppController = marionette.Controller.extend({
         this.app = app;
 
         this.masterCollection = new Tasks();
+        this.masterCollection.fetch();
 
         this.app.headerRegion.show(new HeaderView({
             collection: this.masterCollection
@@ -33,12 +34,18 @@ var AppController = marionette.Controller.extend({
             collection: this.masterCollection
         }));
 
+        if (this.masterCollection.length === 0) {
+            app.listRegion.$el.hide();
+        }
+
+        console.log("On initialization, master length: " + this.masterCollection.length)
+
         // Hides list and footer if there are no values.
         this.listenTo(this.masterCollection, 'all', function() {
-            if (this.masterCollection.length === 0) {
-                app.listRegion.$el.hide();
-            } else {
+            if (this.masterCollection.length > 0) {
                 app.listRegion.$el.show();
+            } else {
+                app.listRegion.$el.hide();
             }
         });
     },

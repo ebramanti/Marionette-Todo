@@ -10,7 +10,6 @@ var Status = {
 }
 
 var Task = backbone.Model.extend({
-    //localStorage: new LocalStorage('task-list'),
     defaults: {
         title: null,
         isActive: true,
@@ -18,10 +17,10 @@ var Task = backbone.Model.extend({
     },
     initialize: function() {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
-        this.set('date', Date.now());
+        this.set('date', Date.now()).save();
     },
     toggleIsActive: function() {
-        this.set('isActive', !this.get('isActive'));
+        this.set('isActive', !this.get('isActive')).save();
     }
 });
 

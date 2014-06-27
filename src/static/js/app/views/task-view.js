@@ -46,7 +46,7 @@ var TaskView = marionette.ItemView.extend({
     editAccept: function() {
         var taskString = this.ui.input.val().trim();
         if (event.which === keys.ENTER_KEY && taskString) {
-            this.model.set('title', taskString);
+            this.model.set('title', taskString).save();
             console.log(this.model.get('title'));
             this.ui.input.val('');
             this.ui.input.hide();

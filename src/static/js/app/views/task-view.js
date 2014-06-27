@@ -54,7 +54,7 @@ var TaskView = marionette.ItemView.extend({
     },
 
     switchState: function() {
-        this.model.toggleIsActive().save();
+        this.model.toggleIsActive();
         this.toggleClass();
     },
 

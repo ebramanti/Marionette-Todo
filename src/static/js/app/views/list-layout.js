@@ -86,7 +86,6 @@ var ListLayout = Backbone.Marionette.Layout.extend({
     },
 
     showCollection: function(view) {
-        console.log(view.collection.models)
         if (view !== this.currentCollectionView) {
             this.filtered.show(view, {preventClose: true});
             this.currentCollectionView = view;

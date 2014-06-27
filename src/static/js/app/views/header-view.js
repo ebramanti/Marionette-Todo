@@ -31,9 +31,6 @@ var HeaderView = marionette.ItemView.extend({
         this.masterCollection.add({
             title: name
         });
-        this.masterCollection.each(function(task) {
-            task.save();
-        })
     }
 });
 

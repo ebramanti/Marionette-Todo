@@ -30,6 +30,7 @@ var AppController = marionette.Controller.extend({
         this.app.headerRegion.show(new HeaderView({
             collection: this.masterCollection
         }));
+
         this.app.listRegion.show(new ListLayout({
             collection: this.masterCollection
         }));
@@ -37,8 +38,6 @@ var AppController = marionette.Controller.extend({
         if (this.masterCollection.length === 0) {
             app.listRegion.$el.hide();
         }
-
-        console.log("On initialization, master length: " + this.masterCollection.length)
 
         // Hides list and footer if there are no values.
         this.listenTo(this.masterCollection, 'all', function() {

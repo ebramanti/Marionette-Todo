@@ -2,7 +2,6 @@
 define(function( require, exports, module ){
 
 var backbone = require('backbone');
-var LocalStorage = require('backbone/localstorage');
 
 var Status = {
     Active: 'active',

@@ -8,7 +8,7 @@ describe('my description', function() {
 
     it('should succeed', function() {
         var $node = $('#foo');
-        console.log($node.text());
+        //console.log($node.text());
         expect(true).toBe(true);
     });
 

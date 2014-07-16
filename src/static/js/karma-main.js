@@ -5,7 +5,7 @@ var tests = [
 
     // ---------------------------
     // Load Specs (AKA tests)
-    'tests/spec-app',
+    //'tests/spec-app',
     'tests/spec-app-header'
 ];
 

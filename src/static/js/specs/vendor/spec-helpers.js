@@ -173,6 +173,10 @@ var SpecHelpers = {
             this.simulateKeyEvent($el, 'keyup', keyCode);
         },
 
+        simulateKeyPress: function($el, keyCode){
+            this.simulateKeyEvent($el, 'keypress', keyCode);
+        },
+
         insertChar: function($el, char){
             var val = function(){
                 var action = $el.is('input') ? $el.val : $el.text;

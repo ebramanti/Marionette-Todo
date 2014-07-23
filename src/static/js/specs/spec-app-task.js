@@ -36,19 +36,19 @@ describe('my task view', function() {
             }),
             model: new Task({
                 title: "A test of editing."
-            })
+            }),
+            ignoreLocalStorage: true
         });
         region.show(taskView);
 
-        //console.log(taskView.masterCollection.length);
         eventHelpers.simulateMouseDown(taskView.ui.edit);
 
         var changedTitle = "Changed it.";
         eventHelpers.insertChar(taskView.ui.input, changedTitle);
-        console.log(taskView.ui.input)
-        eventHelpers.simulateKeyPress(taskView.ui.edit, 13);
-        //console.log(taskView.model)
-        //expect(taskView.model.attributes.title).toEqual(changedTitle);
+        //console.log(taskView.ui.input)
+        eventHelpers.simulateKeyPress(taskView.ui.input, KeyCodes.return);
+        console.log(taskView.model.attributes.title);
+        expect(taskView.model.attributes.title).toEqual(changedTitle);
 
     });
 });

@@ -59,9 +59,12 @@ describe('my header view', function() {
         var headerView = getSpyHeader();
         region.show(headerView);
         var testString = "Hello, world";
-        eventHelpers.insertChar(headerView.ui.input, testString)
+        eventHelpers.insertText(headerView.ui.input, testString)
         eventHelpers.simulateKeyPress(headerView.ui.input, KeyCodes.return);
         expect(headerView.onInputConfirm).toHaveBeenCalled();
+        //console.log(headerView.masterCollection.length);
+
+        //This should not fail.
         //expect(headerView.masterCollection.length).toEqual(1);
     });
 

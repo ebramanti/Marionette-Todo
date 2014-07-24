@@ -15,7 +15,6 @@ describe('my header view', function() {
         var SpyHeader = HeaderView.extend({
             onInputConfirm: onInputConfirm
         });
-        // ignoreLocalStorage? Whitespace becoming models.
         return new SpyHeader({collection: new Tasks()});
     }
 
@@ -42,35 +41,38 @@ describe('my header view', function() {
     });
 
     it('should do nothing if enter key is pressed and no text is entered', function(){
-        var headerView = getSpyHeader();
+        var headerView = new HeaderView({
+            collection: new Tasks()
+        });
         region.show(headerView);
         eventHelpers.simulateKeyPress(headerView.ui.input, KeyCodes.return);
-        expect(headerView.onInputConfirm).toHaveBeenCalled();
         expect(headerView.masterCollection.length).toEqual(0);
     });
 
     it('should do nothing if empty text is in input when enter key is pressed', function(){
-        var headerView = getSpyHeader();
+        var headerView = new HeaderView({
+            collection: new Tasks()
+        });
         region.show(headerView);
         // Blank spaces used as an example of empty text.
         var testString = "   "
         eventHelpers.insertChar(headerView.ui.input, testString)
         eventHelpers.simulateKeyPress(headerView.ui.input, KeyCodes.return);
-        expect(headerView.onInputConfirm).toHaveBeenCalled();
         expect(headerView.masterCollection.length).toEqual(0);
     });
 
     it('should create task when valid input', function(){
-        var headerView = getSpyHeader();
+        var headerView = new HeaderView({
+            collection: new Tasks()
+        });
         region.show(headerView);
         var testString = "Hello, world";
         eventHelpers.insertChar(headerView.ui.input, testString);
         eventHelpers.simulateKeyPress(headerView.ui.input, KeyCodes.return);
-        expect(headerView.onInputConfirm).toHaveBeenCalled();
-        //console.log(headerView.masterCollection.length);
 
-        //This should not fail.
         expect(headerView.masterCollection.length).toEqual(1);
+        var taskTitle = headerView.masterCollection.at(0).attributes.title;
+        expect(taskTitle).toBe(testString);
     });
 
 });

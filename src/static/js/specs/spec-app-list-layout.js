@@ -24,6 +24,41 @@ define(function(require, exports, module) {
             region.show(listLayout);
         });
 
+        it('shows correct data on initialization', function() {
+            var masterCollection = new Tasks([
+                {title: '1'},
+                {title: '2'},
+                {title: '3', isActive: false}
+            ],
+            {
+                ignoreLocalStorage: true
+            });
+
+            var listLayout = new ListLayout({
+                collection: masterCollection
+            });
+            region.show(listLayout);
+
+            var partitions = listLayout.partitions;
+
+            expect(listLayout.currentCollectionView).toEqual(partitions['*'])
+            expect(listLayout.numActive).toEqual(2);
+
+            listLayout = new ListLayout({
+                collection: new Tasks([{
+                    title: '1',
+                    isActive: false
+                }],
+                {
+                    ignoreLocalStorage: true
+                })
+            });
+
+            region.show(listLayout);
+            expect(listLayout.ui.checkDone.hasClass('done')).toBe(true);
+
+        });
+
         it('creates partitions properly', function() {
             var masterCollection = new Tasks([
                 {title: '1'},
@@ -108,13 +143,29 @@ define(function(require, exports, module) {
             });
             region.show(listLayout);
 
-            //eventHelpers.simulateMouseDown(listLayout.ui.clearCompleted);
-            // Modify tests so it presses the clear completed button.
             listLayout.wantsClearCompleted();
             expect(listLayout.collection.length).toEqual(0);
         });
 
-        it
+        it('toggles all tasks based on a toggle-all', function() {
+            var masterCollection = new Tasks([
+                {title: '1', isActive: true},
+                {title: '2', isActive: true},
+                {title: '3', isActive: true}
+            ],
+            {
+                ignoreLocalStorage: true
+            });
+            var listLayout = new ListLayout({
+                collection: masterCollection
+            });
+            region.show(listLayout);
+
+            listLayout.wantsToggleAll();
+            listLayout.collection.models.forEach(function(model) {
+                expect(model.attributes.isActive).toBe(false);
+            });
+        });
     });
 
 })

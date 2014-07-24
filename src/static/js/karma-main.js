@@ -5,10 +5,9 @@ var tests = [
 
     // ---------------------------
     // Load Specs (AKA tests)
-    //'tests/spec-app',
-    'tests/spec-app-header',
-    'tests/spec-app-task',
-    'tests/spec-app-list',
+    'tests/spec-app-header-view',
+    'tests/spec-app-task-view',
+    'tests/spec-app-list-view',
     'tests/spec-app-list-layout'
 ];
 

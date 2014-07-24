@@ -15,6 +15,7 @@ describe('my header view', function() {
         var SpyHeader = HeaderView.extend({
             onInputConfirm: onInputConfirm
         });
+        // ignoreLocalStorage? Whitespace becoming models.
         return new SpyHeader({collection: new Tasks()});
     }
 
@@ -69,7 +70,7 @@ describe('my header view', function() {
         //console.log(headerView.masterCollection.length);
 
         //This should not fail.
-        //expect(headerView.masterCollection.length).toEqual(1);
+        expect(headerView.masterCollection.length).toEqual(1);
     });
 
 });

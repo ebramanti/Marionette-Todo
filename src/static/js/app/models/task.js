@@ -12,14 +12,19 @@ var Task = backbone.Model.extend({
     defaults: {
         title: null,
         isActive: true,
-        date: null
+        date: null,
+        localStorage: true
     },
     initialize: function() {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
         this.set('date', Date.now());
     },
     toggleIsActive: function() {
-        this.set('isActive', !this.get('isActive')).save();
+        if (this.localStorage) {
+            this.set('isActive', !this.get('isActive')).save();
+        } else {
+            this.set('isActive', !this.get('isActive'));
+        }
     }
 });
 

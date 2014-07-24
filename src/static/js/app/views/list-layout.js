@@ -15,7 +15,8 @@ var ListLayout = Backbone.Marionette.Layout.extend({
     ui: {
         numberActive: '#active-count strong',
         toggleAll: '#toggle-all',
-        checkDone: '#check-done'
+        checkDone: '#check-done',
+        clearCompleted: '#clear-completed'
     },
 
     events: {

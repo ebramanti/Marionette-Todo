@@ -24,7 +24,11 @@ describe('my header view', function() {
     });
 
     it('initializes', function() {
-        var headerView = new HeaderView({collection: new Tasks()});
+        var headerView = new HeaderView({
+            collection: new Tasks({
+                ignoreLocalStorage: true
+            })
+        });
         expect(headerView).toBeDefined();
         region.show(headerView);
     });

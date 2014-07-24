@@ -45,11 +45,29 @@ describe('my task view', function() {
 
         var changedTitle = "Changed it.";
         eventHelpers.insertChar(taskView.ui.input, changedTitle);
-        //console.log(taskView.ui.input)
         eventHelpers.simulateKeyPress(taskView.ui.input, KeyCodes.return);
-        console.log(taskView.model.attributes.title);
         expect(taskView.model.attributes.title).toEqual(changedTitle);
 
     });
+
+    it ('should allow toggling between active/completed', function() {
+        var taskView = new TaskView({
+            masterCollection: new Tasks({
+                ignoreLocalStorage: true
+            }),
+            model: new Task({
+                title: "A toggle test.",
+                isActive: true
+            }),
+            ignoreLocalStorage: true
+        });
+        region.show(taskView);
+
+        eventHelpers.simulateMouseDown(taskView.ui.checkbox);
+        eventHelpers.simulateMouseUp(taskView.ui.checkbox);
+        console.log(taskView.model.attributes.isActive);
+        //expect(taskView.model.attributes.isActive).toBe(false);
+
+    })
 });
 });

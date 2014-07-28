@@ -8,7 +8,7 @@
   "devDependencies": {
     "jsdoc-rst-template": "0.0.17",
     "jsdoc": "~3.3.0-alpha8",
-    "karma": "~0.12.16",
+    "karma": "~0.12.19",
     "karma-chrome-launcher": "~0.1.4",
     "karma-jasmine": "~0.2.2",
     "requirejs": "~2.1.14",

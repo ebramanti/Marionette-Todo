@@ -25,7 +25,6 @@ var TaskView = marionette.ItemView.extend({
     initialize: function(options) {
         this.masterCollection = options.masterCollection;
         this.model = options.model;
-        this.listenTo(this.model, 'change', this.render);
         this.ignoreLocalStorage = options.ignoreLocalStorage || false;
     },
 
@@ -53,6 +52,7 @@ var TaskView = marionette.ItemView.extend({
                 this.model.set('title', taskString).save();
             }
             console.log(this.model.get('title'));
+            this.ui.title.html(taskString);
             this.ui.input.val('');
             this.ui.input.hide();
         }

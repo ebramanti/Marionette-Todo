@@ -1,31 +1,18 @@
-/**
- * INput Select Composite View
- * @module built.ui.views.composite.input-select
- */
 define(function (require, exports, module) {
 
 var marionette   = require('marionette');
 var InputSelect  = require('built/ui/controls/input-select').InputSelectMarionette;
 var helpers      = require('built/core/utils/helpers');
+var Scroller     = require('built/core/controls/page/scroller').Scroller;
 var focus        = require('built/core/events/focus');
 var data         = require('built/core/events/data');
 var events       = require('built/core/events/event');
 
-var InputSelectComposite =  marionette.CompositeView.extend(
-/** @lends built.ui.views.composite.input-select.InputSelectComposite.prototype */
-{
+var InputSelectComposite =  marionette.CompositeView.extend({
     minLength: 2,
     debounceDelay: 300,
     acceptsMouseEnterExit:true,
-
-    /**
-     * Creates a new InputSelectComposite
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
+    
     initialize : function(options){
          this.options = options;
     },

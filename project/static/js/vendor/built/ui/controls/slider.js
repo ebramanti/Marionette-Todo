@@ -1,7 +1,3 @@
-/**
- * UI Slider Implementation
- * @module built.ui.controls.slider
- */
 define(function(require, exports, module){
 
 var _ = require('underscore');
@@ -10,31 +6,25 @@ var dragEvents = require('built/core/events/drag');
 var events = require('built/core/events/event');
 var composeAll = require('built/core/utils/helpers').composeAll;
 
-var SliderContainer = marionette.Controller.extend(
-/** @lends built.ui.controls.slider.SliderContainer.prototype */
-{
+var SliderContainer = marionette.Controller.extend({
 
     _driver: null,
     _uiUpdater: null,
 
     /**
-     * Creates a new SliderContainer
-
+     * Initialize slider container
+     * @param  {options} options options literal
+     * @return {undefined}
+     *
      * @example
      * var sliderContainer = new SliderContainer({
      *     driver: new HorizontalSliderControl({
      *         // slider options
      *         // see built/core/controls/horizontal.js
      *     })
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
+     * });
      */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-
+    initialize: function(options){
         this.options = _.defaults(options, this._getDefaults());
         this._driver = this._initializeDriver(this.options);
         this._uiUpdater = this._initializeUiUpdater(this._driver.options);

@@ -1,7 +1,3 @@
-/**
- * General Helpers
- * @module built.core.utils.helpers
- */
 define(function(require, exports, module){
 
 // Imports
@@ -35,14 +31,6 @@ function _MSIEVersion()
 }
 
 // Helper functions
-/**
- * #TODO add description
- *
- * @function
- * @memberOf built.core.utils.helpers
- * @return {$element}       jquery element
- *
- */
 function registerElement(value, required){
     var idKey = 'auf-id';
 
@@ -62,14 +50,6 @@ function registerElement(value, required){
     return $el;
 }
 
-/**
- * #TODO add description
- *
- * @function
- * @memberOf built.core.utils.helpers
- * @return {$element}       jquery element
- *
- */
 function getElementId($el){
     var idKey = 'auf-id';
     return $el.data(idKey);
@@ -84,14 +64,6 @@ function getElementId($el){
  *
  * @example
  * compose(this, fooModule, 'fooModuleMethod');
- */
-/**
- * #TODO add description
- *
- * @function
- * @memberOf built.core.utils.helpers
- * @return {$element}       jquery element
- *
  */
 function compose (intoScope, fromScope, func) {
     intoScope[func] = _.bind(fromScope[func], fromScope);
@@ -112,14 +84,6 @@ function compose (intoScope, fromScope, func) {
  *     'fooModuleMethod3'
  * );
  */
-/**
- * #TODO add description
- *
- * @function
- * @memberOf built.core.utils.helpers
- * @return {$element}       jquery element
- *
- */
 function composeAll(intoScope, fromScope) {
     var args;
 
@@ -139,14 +103,6 @@ function composeAll(intoScope, fromScope) {
  * @param  {int} max   the value's max limit
  * @return {int}       normalized integer
  */
-/**
- * #TODO add description
- *
- * @function
- * @memberOf built.core.utils.helpers
- * @return {$element}       jquery element
- *
- */
 function normalizeInt(value, min, max) {
     // Ternary is faster than Math.min|max
     value = value > max ? max : value;
@@ -155,27 +111,11 @@ function normalizeInt(value, min, max) {
     return value;
 }
 
-/**
- * #TODO add description
- *
- * @function
- * @memberOf built.core.utils.helpers
- * @return {$element}       jquery element
- *
- */
 function sortArrayAscending(a, b) {
     // see: http://bit.ly/1c0cPTU
     return a - b;
 }
 
-/**
- * #TODO add description
- *
- * @function
- * @memberOf built.core.utils.helpers
- * @return {$element}       jquery element
- *
- */
 function mixins(Source, Destination){
     names = Array.prototype.slice.call(arguments, 2);
     _.each(names, function(name){
@@ -188,26 +128,10 @@ function mixins(Source, Destination){
 // Taken directly from Marionette.
 // For slicing `arguments` in functions
 var protoSlice = Array.prototype.slice;
-/**
- * #TODO add description
- *
- * @function
- * @memberOf built.core.utils.helpers
- * @return {$element}       jquery element
- *
- */
 function slice(args) {
   return protoSlice.call(args);
 }
 
-/**
- * #TODO add description
- *
- * @function
- * @memberOf built.core.utils.helpers
- * @return {$element}       jquery element
- *
- */
 function throwError(message, name) {
   var error = new Error(message);
   error.name = name || 'Error';

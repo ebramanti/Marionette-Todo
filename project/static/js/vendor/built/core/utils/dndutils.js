@@ -1,7 +1,3 @@
-/**
- * Drag and Drop Utilities
- * @module built.core.utils.dndutils
- */
 define(function(require, exports, module){
 
 var _ = require('underscore');
@@ -18,20 +14,8 @@ var cssPointer = require('built/core/features/css-pointer-events');
 // same time.
 var IEOnlyDataTransferDataType = null;
 
-/**
- * utility command used to supress child pointer events
- *
- * .. note ::
- *     http://jsfiddle.net/theodorejb/j2fDt/9/
- *
- * @function
- * @memberOf built.core.utils.dndutils
- * @param  {$element} $el Jquery Element
- * @return {$element}       returns the passed in jquery selector for chaining
- *
- */
 function supressChildPointerEvents($el){
-
+    // http://jsfiddle.net/theodorejb/j2fDt/9/
 
     var targets = [];
 
@@ -54,15 +38,6 @@ function supressChildPointerEvents($el){
     return $el;
 }
 
-/**
- * utility command used to clear the supression of child pointer events
- *
- * @function
- * @memberOf built.core.utils.dndutils
- * @param  {$element} $el Jquery Element
- * @return {$element}       returns the passed in jquery selector for chaining
- *
- */
 function clearSupressedPointerEvents($el){
 
     if (cssPointer.supported()){

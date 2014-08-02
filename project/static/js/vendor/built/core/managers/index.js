@@ -1,7 +1,3 @@
-/**
- * Managers - Index Manager
- * @module built.core.managers.index
- */
 define(function(require, exports, module){
 
 // Imports
@@ -13,22 +9,9 @@ var events       = require('built/core/events/event');
 
 // Module
 
-var IndexManager = marionette.Controller.extend(
-/** @lends built.core.managers.index.IndexManager.prototype */
-{
+var IndexManager = marionette.Controller.extend({
 
-    /**
-     * Creates a new IndexManager
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        options = options || {};
-
+    initialize: function(options){
         this.range = new RangeManager();
         this.setLength(options.length || 0);
     },

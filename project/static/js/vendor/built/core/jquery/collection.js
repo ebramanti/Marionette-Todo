@@ -1,7 +1,3 @@
-/**
- * JQuery Collections
- * @module built.core.jquery.collection
- */
 define(function(require, exports, module){
 
 // Imports
@@ -9,22 +5,11 @@ var $          = require('jquery');
 var marionette = require('marionette');
 
 // Module
-var Collection =  marionette.Controller.extend(
-/** @lends built.core.jquery.collection.Collection.prototype */
+var Collection =  marionette.Controller.extend({
 
-{
+    // Initialization
 
-
-    /**
-     * Creates a new Collection
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
+    initialize: function(options){
         this.reset();
     },
 

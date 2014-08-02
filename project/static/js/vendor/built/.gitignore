@@ -73,5 +73,3 @@ tests/rig
 
 !/tests/lib/jasmine/jasmine.css
 npm-debug.log
-
-docs

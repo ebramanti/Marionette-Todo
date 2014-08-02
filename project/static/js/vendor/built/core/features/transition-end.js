@@ -1,23 +1,10 @@
-/**
- * Feature Detection - Transitions
- * @module built.core.features.transition-end
- */
 define(function(require, exports, module){
 
 
-/**
- * tests if transition-end events are supported
- *
- * .. note ::
- *     No credit here, see :
- *     http://www.modernizr.com/
- *
- * @function
- * @memberOf built.core.features.transition-end
- * @return {Boolean}    if transition-end events are supported or not
- *
- */
+// Module
 function supported(){
+    // No credit here, see :
+    // http://www.modernizr.com/
 
     var element = document.createElement('built');
 

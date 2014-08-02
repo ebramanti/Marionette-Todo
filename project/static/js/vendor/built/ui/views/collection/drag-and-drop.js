@@ -1,7 +1,3 @@
-/**
- * Drag and Drop Collection View
- * @module built.ui.views.collection.drag-and-drop
- */
 define(function (require, exports, module) {
 
 var marionette = require('marionette');
@@ -10,17 +6,7 @@ var registerElement = require('built/core/utils/helpers').registerElement;
 var DragDropList = require('built/core/controls/dragdrop/list').DragDropList;
 
 
-var DragAndDropCollectionView =  marionette.CollectionView.extend(
-/** @lends built.ui.views.collection.drag-and-drop.DragAndDropCollectionView.prototype */
-{
-    /**
-     * Creates a new DragAndDropCollectionView
-     *
-     * @constructs
-     * @extends marionette.CollectionView
-     * @param {object} [options] Options for Initialization
-     *
-     */
+var DragAndDropCollectionView =  marionette.CollectionView.extend({
     initialize: function(options){
         options = _.extend({dataType:'com.built.generic'}, options);
 

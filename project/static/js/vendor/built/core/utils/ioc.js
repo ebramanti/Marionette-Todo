@@ -1,23 +1,17 @@
-/**
- * Inversion of Control Container
- * @module built.core.utils.ioc
- */
 define(function(require, exports, module){
 
-    var marionette = require('marionette');
+    var Marionette = require('marionette');
     var _ = require('underscore');
+    
 
-
-    var Component = marionette.Controller.extend({
+    var Component = Marionette.Controller.extend({
         cls: null,
         kwargs:null,
         key:null,
         container: null,
         dependencies: null,
 
-        constructor: function(options){
-            marionette.Controller.prototype.constructor.apply(this, arguments);
-
+        initialize: function(options){
             this.dependencies = [];
             _.extend(this, options);
         },
@@ -39,33 +33,19 @@ define(function(require, exports, module){
             });
 
             target = this.cls;
-
+            
             if(_.isFunction(target)){
                 obj = new target(_.extend(args, kwargs));
                 return obj;
             } else {
                 return target;
             }
-
+            
         }
     });
 
-    var Container = marionette.Controller.extend(
-    /** @lends built.core.utils.ioc.Container.prototype */
-    {
+    var Container = Marionette.Controller.extend({
         registry: {},
-
-        /**
-         * Creates a new Container
-         *
-         * @constructs
-         * @extends marionette.Controller
-         * @param {object} [options] Options for Initialization
-         *
-         */
-        constructor: function(options) {
-            marionette.Controller.prototype.constructor.apply(this, arguments);
-        },
 
         register: function(name, cls, kwargs){
             var component = new Component({cls:cls});
@@ -80,7 +60,6 @@ define(function(require, exports, module){
             return component.call();
         }
     });
-
     exports.Container = Container;
 });
 

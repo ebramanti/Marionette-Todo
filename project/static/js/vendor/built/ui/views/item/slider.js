@@ -1,8 +1,3 @@
-/**
- * Slider View
- * @module built.ui.views.item.slider
- */
-
 define(function (require, exports, module) {
 
 var _ = require('underscore');
@@ -12,20 +7,20 @@ var dragEvents = require('built/core/events/drag');
 var events = require('built/core/events/event');
 var getElement = require('built/ui/helpers/dom').getElement;
 
-var SliderView =  marionette.ItemView.extend(
-/** @lends built.ui.views.item.slider.SliderView.prototype */
-{
+var SliderView =  marionette.ItemView.extend({
 
     _container: null,
     _driver: null,
 
     /**
      * Initialize slider view
+     * @param  {object} options options literal
+     * @return {undefined}
      *
-     * @constructs
-     * @extends marionette.ItemView
-     * @param {object} [options] Options for Initialization
-     *
+     * @see
+     * built/ui/views/horizontal-slider.js        // ref implementation
+     * built/ui/views/horizontal-range-slider.js  // ref implementation
+     * built/core/controls/horizontal.js          // constructor init
      */
     initialize: function(options){
         options = options || {};

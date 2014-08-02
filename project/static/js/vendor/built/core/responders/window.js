@@ -1,19 +1,13 @@
-/**
- * Responders - Window
- * @module built.core.responders.window
- */
 define(function(require, exports, module) {
 
 // Imports
 
-var marionette = require('marionette');
+var Marionette = require('marionette');
 var _          = require('underscore');
 
 // Module
 
-var WindowResponder = marionette.Controller.extend(
-/** @lends built.core.responders.window.WindowResponder.prototype */
-{
+var WindowResponder = Marionette.Controller.extend({
 
     EVENT_ORIENTATION: 'orientationchange.built.responders.orientation',
     EVENT_RESIZE     : 'resize.built.responder.resize',
@@ -25,7 +19,9 @@ var WindowResponder = marionette.Controller.extend(
     // Backbone & Marionette overrides
 
     /**
-     * Creates a new WindowResponder
+     * Initialize WindowResponder
+     * @param  {object} options options literal
+     * @return {undefined}
      *
      * @example
      * var windowResponder = new WindowResponder(
@@ -35,17 +31,8 @@ var WindowResponder = marionette.Controller.extend(
      *         resizeDebounce    : 600,  // optional, default 300, debounces (or throttles) resize delegate calls. Pass in 0 to disable.
      *     }
      * );
-     *
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
      */
-    constructor: function(options) {
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        this.listenTo(this, 'close', this.deinit);
-
+    initialize: function(options) {
         _.extend(this, options);
 
         _.bindAll(
@@ -71,7 +58,7 @@ var WindowResponder = marionette.Controller.extend(
         }
     },
 
-    deinit: function() {
+    onClose: function() {
         if(this.acceptsOrientation) {
             $(window).off(this.EVENT_ORIENTATION, this._orientationChange);
         }

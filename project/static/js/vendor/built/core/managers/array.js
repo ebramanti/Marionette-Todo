@@ -1,7 +1,3 @@
-/**
- * Managers - Array
- * @module built.core.managers.array
- */
 define(function(require, exports, module){
 
 // Imports
@@ -13,21 +9,9 @@ var events = require('built/core/events/event');
 
 // Module
 
-var ArrayManager = marionette.Controller.extend(
-/** @lends built.core.managers.array.ArrayManager.prototype */
-{
+var ArrayManager = marionette.Controller.extend({
 
-    /**
-     * Creates a new ArrayManager
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        options = options || {};
+    initialize: function(options){
         this.setArray(options.list || []);
     },
 
@@ -90,6 +74,10 @@ var ArrayManager = marionette.Controller.extend(
 
     _dispatchChange: function() {
         this.trigger(events.CHANGE, this);
+    },
+
+    onClose: function(){
+
     }
 
 });

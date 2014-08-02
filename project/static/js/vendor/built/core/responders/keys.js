@@ -1,39 +1,21 @@
-/**
- * Responders - Keys
- * @module built.core.responders.keys
- */
 define(function(require, exports, module){
 
 // Imports
 
 var _                    = require('underscore');
-var marionette           = require('marionette');
+var Marionette           = require('marionette');
 var KeyInputManager      = require('built/core/managers/key-input').KeyInputManager;
 var KeyEquivalentManager = require('built/core/managers/key-equivalent').KeyEquivalentManager;
 var helpers              = require('built/core/utils/helpers');
 
 // Module
 
-var KeyResponder = marionette.Controller.extend(
-/** @lends built.core.responders.keys.KeyResponder.prototype */
-{
+var KeyResponder = Marionette.Controller.extend({
     el: null,
     inputManager: null,
     equivalentManager: null,
 
-    /**
-     * Creates a new KeyResponder
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        this.listenTo(this, 'close', this.deinit);
-
-
+    initialize: function(options){
         _.extend(this, options);
         _.bindAll(this, '_keyDown', '_keyUp');
 
@@ -147,7 +129,7 @@ var KeyResponder = marionette.Controller.extend(
         }
     },
 
-    deinit: function(){
+    onClose: function(){
         this.inputManager = null;
         this.equivalentManager = null;
 

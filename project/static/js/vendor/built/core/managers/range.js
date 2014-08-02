@@ -1,7 +1,3 @@
-/**
- * Managers - Range
- * @module built.core.managers.range
- */
 define(function(require, exports, module){
 
 // Imports
@@ -13,9 +9,7 @@ var events     = require('built/core/events/event');
 
 // Module
 
-var RangeManager = marionette.Controller.extend(
-/** @lends built.core.managers.range.RangeManager.prototype */
-{
+var RangeManager = marionette.Controller.extend({
 
     _defaults: null,
     _range   : null,
@@ -26,8 +20,10 @@ var RangeManager = marionette.Controller.extend(
     _markers: null,
     _lastDispatched: null,
 
-     /**
-     * Creates a new RangeManager
+    /**
+     * Initialize RangeManager
+     * @param  {object} options options literal
+     * @return {undefined}
      *
      * @example
      * rangeManager = new RangeManager(
@@ -36,17 +32,10 @@ var RangeManager = marionette.Controller.extend(
      *         max: 1, // default 1
      *     }
      * );
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
      */
-    constructor: function(options) {
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-
-        this.options = options || {};
-        _.defaults(this.options, this._getDefaults());
+    initialize: function(options) {
+        this.options = options;
+        _.defaults(options, this._getDefaults());
 
         this._markers         = [];
         this._lastDispatched  = [];

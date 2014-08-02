@@ -1,7 +1,3 @@
-/**
- * Responders - Mouse
- * @module built.core.responders.mouse
- */
 define(function(require, exports, module){
 
 // Imports
@@ -12,9 +8,7 @@ var helpers    = require('built/core/utils/helpers');
 
 // Module
 
-var MouseResponder = marionette.Controller.extend(
-/** @lends built.core.responders.mouse.MouseResponder.prototype */
-{
+var MouseResponder = marionette.Controller.extend({
 
     // Object vars
 
@@ -46,17 +40,8 @@ var MouseResponder = marionette.Controller.extend(
     // Time window, in milliseconds,  to count clicks
     clickCountTimeout: 350,
 
-    /**
-     * Creates a new MouseResponder
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        this.listenTo(this, 'close', this.deinit);
+    // Initialization
+    initialize: function(options){
 
         _.bindAll(this, '_mouseDown', '_mouseUp',
             '_mouseEntered', '_mouseExited',
@@ -227,7 +212,7 @@ var MouseResponder = marionette.Controller.extend(
 
     // marionette overrides
 
-    deinit: function(){
+    onClose: function(){
         // to ensure it's gone
         $('body').off('mousemove.built.responders.mouse', this._mouseDragged);
 

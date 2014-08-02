@@ -1,7 +1,3 @@
-/**
- * Drag and Drop List Controller
- * @module built.core.controls.sliders.horizontal
- */
 define(function(require, exports, module){
 
 var _ = require('underscore');
@@ -15,9 +11,7 @@ var getElementBounds = require('built/ui/helpers/dom').getElementBounds;
 var registerElement = require('built/core/utils/helpers').registerElement;
 var composeAll = require('built/core/utils/helpers').composeAll;
 
-var HorizontalSliderControl = marionette.Controller.extend(
-/** @lends built.core.controls.sliders.horizontal.HorizontalSliderControl.prototype */
-{
+var HorizontalSliderControl = marionette.Controller.extend({
 
     _rangeManagers : null,
     _mouseResponders : null,
@@ -25,10 +19,11 @@ var HorizontalSliderControl = marionette.Controller.extend(
     _handleOffsets : [],
 
     /**
-     * Creates a new HorizontalSliderControl
+     * Initialize HorizontalSliderControl
+     * @param  {object} options options literal
+     * @return {undefined}
      *
      * @example
-     *
      * horizontalSliderControl = new HorizontalSliderControl(
      *     {
      *         container    : $('.slider'),           // required, string or jquery
@@ -40,16 +35,8 @@ var HorizontalSliderControl = marionette.Controller.extend(
      *         acceptsTouch : false                   // default false
      *     }
      * );
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
      */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        this.listenTo(this, 'close', this.deinit);
-
+    initialize: function(options){
         this.options = _.defaults(options, this._getDefaults());
 
         this.$container = registerElement(this.options.container, true);
@@ -66,7 +53,7 @@ var HorizontalSliderControl = marionette.Controller.extend(
         }
     },
 
-    deinit: function() {
+    onClose: function() {
         var controllers;
 
         function iterator (controller, i, list) {

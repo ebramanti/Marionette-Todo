@@ -1,7 +1,3 @@
-/**
- * Drag and Drop List Controller
- * @module built.core.responders.clicks
- */
 define(function (require, exports, module) {
 
 var $ = require('jquery');
@@ -9,22 +5,9 @@ var _ = require('underscore');
 var marionette = require('marionette');
 var helpers = require('built/core/utils/helpers');
 
-var ClickTestResponder = marionette.Controller.extend(
-/** @lends built.core.responders.clicks.ClickTestResponder.prototype */
-{
+var ClickTestResponder = marionette.Controller.extend({
 
-    /**
-     * Creates a new ClickTestResponder
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        this.listenTo(this, 'close', this.deinit);
-
+    initialize: function(options){
         _.bindAll(this, 'onWindowPress', 'initializeWindowListener');
         this.$el = helpers.registerElement(options.el);
 
@@ -72,7 +55,7 @@ var ClickTestResponder = marionette.Controller.extend(
         // noop
     },
 
-    deinit: function(){
+    onClose: function(){
         $(window).off('click', this.onWindowPress);
         $(window).off('contextmenu', this.onWindowPress);
     }

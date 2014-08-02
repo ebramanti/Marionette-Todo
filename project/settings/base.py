@@ -20,7 +20,7 @@ if APPS_ROOT not in path:
 
 # Site name:
 SITE_NAME = basename(DJANGO_ROOT)
-GRAPPELLI_ADMIN_TITLE = "marionette-todo"
+GRAPPELLI_ADMIN_TITLE = "todo"
 # Add our project to our pythonpath, this way we don't need to type our project
 # name in our dotted import paths:
 path.append(DJANGO_ROOT)
@@ -250,7 +250,7 @@ THIRD_PARTY_APPS = (
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'utils',
-    'marionetteTodo'
+    'todo'
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

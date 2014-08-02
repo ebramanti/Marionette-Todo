@@ -1,7 +1,3 @@
-/**
- * Swipe Gesture
- * @module built.core.gestures.swipe
- */
 define(function(require, exports, module){
 
 // Imports
@@ -12,9 +8,7 @@ var TouchResponder = require('built/core/responders/touches').TouchResponder;
 
 // Module
 
-var SwipeGesture = marionette.Controller.extend(
-/** @lends built.core.gestures.swipe.SwipeGesture.prototype */
-{
+var SwipeGesture = marionette.Controller.extend({
 
     // Object vars
 
@@ -27,19 +21,9 @@ var SwipeGesture = marionette.Controller.extend(
     // of the target view in the selected direction to count.
     threshold: 0.3,
 
+    // Initializtion
 
-    /**
-     * Creates a new SwipeGesture
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        this.listenTo(this, 'close', this.deinit);
-
+    initialize: function(options){
         _.extend(this, options);
         _.bindAll(this, 'touchStart', 'touchMove', 'touchEnd');
 
@@ -163,7 +147,7 @@ var SwipeGesture = marionette.Controller.extend(
 
     // Marionette overrides
 
-    deinit: function(){
+    onClose: function(){
         this.reset();
         this.responder.close();
     }

@@ -1,7 +1,3 @@
-/**
- * Select Controller
- * @module built.core.controls.forms.select
- */
 define(function(require, exports, module){
 
 var _                  = require('underscore');
@@ -16,25 +12,11 @@ var focus              = require('built/core/events/focus');
 var event              = require('built/core/events/event');
 var data               = require('built/core/events/data');
 
-var Select = marionette.Controller.extend(
-/** @lends built.core.controls.forms.select.Select.prototype */
-{
+var Select = marionette.Controller.extend({
     _searchText:'',
     searchTimeout: 400,
 
-
-    /**
-     * Creates a new Select
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        this.listenTo(this, 'close', this.deinit);
-
+    initialize: function(options){
         _.extend(this, options);
         _.bindAll(this,
             'insertText',
@@ -117,7 +99,7 @@ var Select = marionette.Controller.extend(
         this.focusManager.focusIndex(this.indexManager.getIndex());
     },
 
-    deinit: function(){
+    onClose: function(){
         this.closeManagers();
         this.keyResponder.close();
     },

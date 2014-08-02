@@ -1,32 +1,19 @@
-/**
- * Drag and Drop List Controller
- * @module built.core.managers.focus-single-model-bound
- */
-
 define(function(require, exports, module){
 
 // Imports
 
+var Marionette             = require('marionette');
 var _                      = require('underscore');
 var SingleSelectionManager = require('auf/ui/managers/focus-single').SingleFocusManager;
 
 // Module
 
-var ModelBoundSingleSelectionManager = SingleSelectionManager.extend(
-/** @lends built.core.managers.focus-single-model-bound.ModelBoundSingleSelectionManager.prototype */
-{
+var ModelBoundSingleSelectionManager = SingleSelectionManager.extend({
 
+    // Initialization
 
-    /**
-     * Creates a new ModelBoundSingleSelectionManager
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
     initialize: function(options){
-        SingleSelectionManager.prototype.initialize.apply(this, arguments);
+        SingleSelectionManager.prototype.initialize.call(this, options);
         this.initializeModelBinding();
     },
 

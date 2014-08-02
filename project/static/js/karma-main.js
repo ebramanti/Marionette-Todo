@@ -5,15 +5,21 @@ var tests = [
 
     // ---------------------------
     // Load Specs (AKA tests)
-    'tests/spec-app',
+    'tests/spec-app-task',
+    'tests/spec-app-tasks',
+    'tests/spec-app-header-view',
+    'tests/spec-app-task-view',
+    'tests/spec-app-list-view',
+    'tests/spec-app-list-layout'
 ];
 
 requirejs.config({
-    baseUrl: '/base/project/static/js',
+    baseUrl: '/base/src/static/js',
 
     paths:{
         'tests': 'specs',
         'jasmine': 'specs/vendor/jasmine',
+        'spec-helpers': 'specs/vendor/spec-helpers'
     },
 
     shim: {

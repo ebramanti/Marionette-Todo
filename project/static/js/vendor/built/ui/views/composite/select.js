@@ -1,7 +1,3 @@
-/**
- * Select Composite View
- * @module built.ui.views.composite.select
- */
 define(function (require, exports, module) {
 
 var marionette = require('marionette');
@@ -16,28 +12,7 @@ var modelFromElements = require('built/ui/helpers/dom').modelFromElements;
 
 
 
-var SelectCompositeView = marionette.CompositeView.extend(
-/** @lends built.ui.views.composite.select.SelectCompositeView.prototype */
-{
-    // End Public API
-    /**
-     * Creates a new SelectCompositeView
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    initialize : function(options){
-        _.extend(this, options);
-        _.bindAll(this,
-            'onWantsOpen',
-            'dismissCollectionView',
-            'presentCollectionView',
-            'onCancel');
-
-        this.model = new Backbone.Model();
-    },
+var SelectCompositeView = marionette.CompositeView.extend({
 
     // Begin Public API
     inputDidReceiveData: function(data){
@@ -59,7 +34,18 @@ var SelectCompositeView = marionette.CompositeView.extend(
     collectionViewDidSelect: function(view){
         this.dismissCollectionView();
     },
+    // End Public API
 
+    initialize : function(options){
+        _.extend(this, options);
+        _.bindAll(this,
+            'onWantsOpen',
+            'dismissCollectionView',
+            'presentCollectionView',
+            'onCancel');
+
+        this.model = new Backbone.Model();
+    },
 
     onShow: function(){
         this.listenTo(this.collection, 'sync', this._onCollectionSync);

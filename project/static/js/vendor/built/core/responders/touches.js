@@ -1,7 +1,3 @@
-/**
- * Responders - Touches
- * @module built.core.responders.touches
- */
 define(function(require, exports, module){
 
 // Imports
@@ -12,27 +8,16 @@ var helpers    = require('built/core/utils/helpers');
 
 // Module
 
-var TouchResponder = marionette.Controller.extend(
-/** @lends built.core.responders.touches.TouchResponder.prototype */
-{
+var TouchResponder = marionette.Controller.extend({
 
     // Object vars
 
     el: null,
     clickCountTimeout: 350,
 
-    /**
-     * Creates a new TouchResponder
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        this.listenTo(this, 'close', this.deinit);
+    // Initialization
 
+    initialize: function(options){
         _.extend(this, options);
         _.bindAll(this, '_touchStart', '_touchMove', '_touchEnd', '_touchCancel');
 
@@ -152,7 +137,9 @@ var TouchResponder = marionette.Controller.extend(
         });
     },
 
-    deinit: function(){
+    // Marionette overrides
+
+    onClose: function(){
         this.$el.off('touchstart.built.responders.touch', this._touchStart);
         this.$el.off('touchmove.built.responders.touch', this._touchMove);
         this.$el.off('touchend.built.responders.touch', this._touchEnd);

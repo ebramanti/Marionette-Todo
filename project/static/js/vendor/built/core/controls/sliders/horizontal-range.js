@@ -1,29 +1,18 @@
-/**
- * Drag and Drop List Controller
- * @module built.core.controls.sliders.horizontal-range
- */
 define(function(require, exports, module) {
 
 var HorizontalSliderControl = require('built/core/controls/sliders/horizontal').HorizontalSliderControl;
 var normalizeInt = require('built/core/utils/helpers').normalizeInt;
 var composeAll = require('built/core/utils/helpers').composeAll;
 
-var HorizontalRangeSliderControl =  HorizontalSliderControl.extend(
-/** @lends built.core.controls.sliders.horizontal-range.HorizontalRangeSliderControl.prototype */
-{
+var HorizontalRangeSliderControl =  HorizontalSliderControl.extend({
 
     /**
-     * Creates a new HorizontalRangeSliderControl
+     * Initialize HorizontalRangeSliderControl
      *
-     * see :ref:`built.core.controls.slider.horizontal`
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
+     * @see built/core/controls/sliders/horizontal.js
      */
-    constructor: function(options) {
-        HorizontalSliderControl.prototype.constructor.apply(this, arguments);
+    initialize: function(options) {
+        this.constructor.__super__.initialize.apply(this, arguments);
     },
 
     // HorizontalSliderControl overrides

@@ -1,7 +1,3 @@
-/**
- * Managers - Focus
- * @module built.core.managers.focus
- */
 define(function(require, exports, module){
 
 // Imports
@@ -14,25 +10,15 @@ var helpers        = require('built/core/utils/helpers');
 var focus          = require('built/core/events/focus');
 // Module
 
-var FocusManager =  array.ArrayManager.extend(
-/** @lends built.core.managers.focus.FocusManager.prototype */
-{
+var FocusManager =  array.ArrayManager.extend({
 
     // Object vars
     allowsDeselect: false,
 
-    /**
-     * Creates a new FocusManager
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        array.ArrayManager.prototype.constructor.apply(this, arguments);
-        this.listenTo(this, 'close', this.deinit);
+    // Initialization
 
+    initialize: function(options){
+        array.ArrayManager.prototype.initialize.call(this, options);
         this.allowsDeselect = options.allowsDeselect;
         this._focusedObjects = [];
     },
@@ -106,8 +92,9 @@ var FocusManager =  array.ArrayManager.extend(
 
     // marionette overrides
 
-    deinit: function(){
+    onClose: function(){
         this._focusedObjects = null;
+        array.ArrayManager.prototype.onClose.call(this);
     }
 
 }); // eof FocusManager

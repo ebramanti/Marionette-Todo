@@ -1,21 +1,15 @@
-/**
- * Responders - Dragging
- * @module built.core.responders.drag
- */
 define(function(require, exports, module){
 
 // Imports
 
-var marionette = require('marionette');
+var Marionette = require('marionette');
 var _          = require('underscore');
 var helpers    = require('built/core/utils/helpers');
 var dndutils   = require('built/core/utils/dndutils');
 
 // Module
 
-var DragResponder = marionette.Controller.extend(
-/** @lends built.core.responders.drag.DragResponder.prototype */
-{
+var DragResponder = Marionette.Controller.extend({
 
     // Object vars
     el: null,
@@ -35,18 +29,8 @@ var DragResponder = marionette.Controller.extend(
     operation: 'all',
     supressChildPointerEvents: false,
 
-    /**
-     * Creates a new DragResponder
-     *
-     * @constructs
-     * @extends marionette.Controller
-     * @param {object} [options] Options for Initialization
-     *
-     */
-    constructor: function(options){
-        marionette.Controller.prototype.constructor.apply(this, arguments);
-        this.listenTo(this, 'close', this.deinit);
-
+    // Initialization
+    initialize: function(options){
         _.extend(this, options);
         _.bindAll(this, '_dragStart', '_dragEnd');
         this._managedElements = {};
@@ -197,7 +181,7 @@ var DragResponder = marionette.Controller.extend(
         }
     },
 
-    deinit: function(){
+    onClose: function(){
         this.reset();
     }
 

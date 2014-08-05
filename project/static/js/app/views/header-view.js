@@ -30,7 +30,7 @@ var HeaderView = marionette.ItemView.extend({
     createTask: function(name) {
         this.masterCollection.add({
             title: name
-        }).save(); //Added here so they are saved to localStorage.
+        });
     }
 });
 

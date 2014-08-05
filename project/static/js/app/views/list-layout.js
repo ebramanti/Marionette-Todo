@@ -123,7 +123,7 @@ var ListLayout = Backbone.Marionette.Layout.extend({
     onToggleAll: function(event) {
         var toggled = this.ui.checkDone.hasClass('done');
         this.masterCollection.forEach(function(model) {
-            model.set('isActive', toggled).save();
+            model.set('isActive', toggled);
         });
         if (toggled) {
             this.ui.checkDone.removeClass('done');

@@ -12,8 +12,6 @@ admin.autodiscover()
 v1_api = Api(api_name='v1')
 v1_api.register(TaskResource())
 
-print v1_api.urls
-
 urlpatterns = patterns(
     '',
     (r'^grappelli/', include('grappelli.urls')),

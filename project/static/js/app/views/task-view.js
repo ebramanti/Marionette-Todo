@@ -49,7 +49,7 @@ var TaskView = marionette.ItemView.extend({
             if (this.ignoreLocalStorage) {
                 this.model.set('title', taskString);
             } else {
-                this.model.set('title', taskString).save();
+                this.model.set('title', taskString);
             }
             console.log(this.model.get('title'));
             this.ui.title.html(taskString);

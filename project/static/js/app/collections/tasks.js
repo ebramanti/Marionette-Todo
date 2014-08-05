@@ -5,7 +5,7 @@ var Task = require('app/models/task').Task;
 
 var Tasks = backbone.Collection.extend({
     model: Task,
-    url: 'api/v1/task',
+    url: 'api/v1/task/',
     parse: function(data) {
         return data.objects;
     },

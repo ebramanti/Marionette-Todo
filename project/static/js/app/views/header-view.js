@@ -28,7 +28,7 @@ var HeaderView = marionette.ItemView.extend({
         }
     },
     createTask: function(name) {
-        this.masterCollection.add({
+        this.masterCollection.create({
             title: name
         });
     }

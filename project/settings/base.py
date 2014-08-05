@@ -217,6 +217,7 @@ MIDDLEWARE_CLASSES = (
 ########## URL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
 ROOT_URLCONF = '%s.urls' % SITE_NAME
+TASTYPIE_DEFAULT_FORMATS = ['json']
 ########## END URL CONFIGURATION
 
 

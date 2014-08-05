@@ -16,11 +16,11 @@ urlpatterns = patterns(
     '',
     (r'^grappelli/', include('grappelli.urls')),
     (r'^admin/', include(admin.site.urls)),
+    # Tastypie Bidness
+    (r'^api/', include(v1_api.urls)),
 
     # Homepage
-    (r'^$', TemplateView.as_view(template_name='index.html')),
-    # Tastypie Bidness
-    (r'^api', include(v1_api.urls))
+    (r'^$', TemplateView.as_view(template_name='index.html'))
 )
 
 #used to show static assets out of the collected-static

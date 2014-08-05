@@ -1,5 +1,5 @@
 from tastypie.resources import ModelResource
-from todo.models import Task
+from .models import Task
 from tastypie.authentication import Authentication
 from tastypie.authorization import Authorization
 

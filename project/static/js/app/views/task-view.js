@@ -25,7 +25,6 @@ var TaskView = marionette.ItemView.extend({
     initialize: function(options) {
         this.masterCollection = options.masterCollection;
         this.model = options.model;
-        this.ignoreLocalStorage = options.ignoreLocalStorage || false;
     },
 
     // On show, set all of the different completed or active states.
@@ -46,11 +45,7 @@ var TaskView = marionette.ItemView.extend({
     editAccept: function(event) {
         var taskString = this.ui.input.val().trim();
         if (event.which === keys.ENTER_KEY && taskString) {
-            if (this.ignoreLocalStorage) {
-                this.model.set('title', taskString);
-            } else {
-                this.model.set('title', taskString);
-            }
+            this.model.set('title', taskString).save();
             console.log(this.model.get('title'));
             this.ui.title.html(taskString);
             this.ui.input.val('');

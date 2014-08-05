@@ -19,7 +19,7 @@ var Task = backbone.Model.extend({
         this.set('date', Date.now());
     },
     toggleIsActive: function() {
-        this.set('isActive', !this.get('isActive'));
+        this.set('isActive', !this.get('isActive')).save();
     }
 });
 
